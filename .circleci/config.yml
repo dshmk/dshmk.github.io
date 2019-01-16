@@ -1,0 +1,32 @@
+version: 2
+jobs:
+    build:
+        docker:
+            - image: cibuilds/hugo:latest
+        environment: 
+            TZ: /usr/share/zoneinfo/Asia/Tokyo
+        steps:
+            - run:
+                name: Update Environment
+                command: |
+                    apk update && apk add git
+                    git config --global user.name "dshmk"
+                    git config --global user.email "egg@dshmk.com"
+            - run:
+                name: Hugo version
+                command: echo "$(hugo version)"
+            - checkout
+            - run:
+                name: Publish
+                command: |
+                    git clone https://github.com/dshmk/blog.dshmk.com.git ../source
+                    pushd ../ && hugo -v && popd
+                    git remote set-url origin https://github.com/dshmk/dshmk.github.io.git
+                    cp -rp ../blog.dshmk.com/public/* ./
+                    git add .
+                    git commit -am "[ci skip] PUBLISH :pencil2:"
+                    git push origin master
+            - run:
+                name: Print the Current Time
+                command: date
+
