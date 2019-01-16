@@ -19,7 +19,7 @@ jobs:
             - run:
                 name: Publish
                 command: |
-                    git clone https://github.com/dshmk/blog.dshmk.com.git ../source
+                    git clone --recursive https://github.com/dshmk/blog.dshmk.com.git ../source
                     pushd ../ && hugo -v && popd
                     git remote set-url origin https://github.com/dshmk/dshmk.github.io.git
                     cp -rp ../blog.dshmk.com/public/* ./
