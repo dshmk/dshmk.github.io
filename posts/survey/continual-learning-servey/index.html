@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="utf-8" />
+  <title>Continual Learning (Lifelong Machine Learning) のことを調べた | dshmk.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Continual Learning (今のところ和訳は特に当てられていないようだ）について簡単に調べたので、まとめておく。
+何も考えずに和訳を当てるとすると、&rdquo;継続学習&rdquo;といったところだろうか。" />
+  <meta name="author" content="dshmk" />
+  <meta name="generator" content="Hugo 0.53" />
+  <link href="https://blog.dshmk.com/index.xml" rel="alternate" type="application/rss+xml" title="dshmk.com Feed" />
+  <link rel="shortcut icon" href="https://blog.dshmk.com/img/favicon.ico" type="image/x-icon" />
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://blog.dshmk.com/assets/style-compat.css" />
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://blog.dshmk.com/assets/style.css" />
+  <!--<![endif]-->
+</head>
+<body>
+<div class="pure-g">
+  <div class="pure-u-1-24 pure-u-md-5-24"></div>
+  <div class="pure-u-22-24 pure-u-md-14-24">
+  <div class="navigation-header">
+  <div class="pure-menu pure-menu-horizontal">
+    <a class="pure-menu-heading pure-menu-link" href="https://blog.dshmk.com/">
+      dshmk.com
+    </a>
+    <ul class="pure-menu-list pull-end navigation-header-subtitle">
+      <li class="pure-menu-item pure-menu-disabled">Making the World Computable</li>
+    </ul>
+  </div>
+</div>
+<div class="navigation-content">
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/posts/">Posts</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/categories/">Categories</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/series/">Series</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/tags/">Tags</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+  
+<div>
+  <div>
+    <h1 class="post-title">Continual Learning (Lifelong Machine Learning) のことを調べた</h1>
+    <div class="post-meta">
+  Date &#x5b;
+    <time datetime="2019-01-15T21:09:36&#43;09:00">15 Jan 19 21:09 JST</time>
+  &#x5d;
+  Categories &#x5b;
+                <a href="https://blog.dshmk.com/categories/survey/">survey</a>
+  &#x5d;
+  Tags &#x5b;
+                <a href="https://blog.dshmk.com/tags/continual-learning/">&#x23;Continual Learning</a>
+            &#x20;&#x7c;&#x20;
+                <a href="https://blog.dshmk.com/tags/reinforcement-learning/">&#x23;Reinforcement Learning</a>
+            &#x20;&#x7c;&#x20;
+                <a href="https://blog.dshmk.com/tags/paper/">&#x23;paper</a>
+  &#x5d;
+</div>
+
+  </div>
+  <div><p>Continual Learning (今のところ和訳は特に当てられていないようだ）について簡単に調べたので、まとめておく。<br />
+何も考えずに和訳を当てるとすると、&rdquo;継続学習&rdquo;といったところだろうか。</p>
+
+<h1 id="continual-learning-lifelong-machine-learning-overview">Continual Learning / Lifelong (Machine) Learning: Overview</h1>
+
+<h2 id="呼び方について">呼び方について</h2>
+
+<p>Continual LearningもしくはLifelong (Machine) Learningと呼ばれることが多いようだ。</p>
+
+<p>NeurIPS 2018のワークショップ名は&rdquo;Continual Learning&rdquo;なので、こちらがメジャーな呼称のように見えるが、<br />
+ワークショップに投稿されている論文のタイトルを見るとどちらも登場しているので、英語でもまだ定まっていないように見える。</p>
+
+<p>Lifelong~は生涯学習を指すので、個人的にはActive Learningのように教育系のタームと被らないContinualのほうが良いとおもうが…<br />
+ちなみに、サーベイ中に生涯学習の意味で&rdquo;Lifelong Learning&rdquo;と記述している情報系の論文にも遭遇した。</p>
+
+<p>ここでは面倒なので、Continual Learningもしくはその頭文字を取ってCLとする（しかし、CLだとCurriculum Learningともかぶるな…）。</p>
+
+<h2 id="歴史">歴史</h2>
+
+<p>おそらくCLの概念を言い出したのは、Cogitaiのファウンダーの<a href="https://www.cs.utexas.edu/~ring/">Mark Ring</a>が1994年に出した
+<a href="http://people.idsia.ch/~ring/Ring-dissertation.pdf">博士論文（pdf）</a>。</p>
+
+<p>ここで彼は、機械学習で新たな知識を学習する際に、すでに学習・習得した知識を再利用するように学習されるべきで、そのために<br />
+<strong>継続的かつ、階層的かつ、追加的に学習できるフレームワークが必要</strong><br />
+だと主張している。</p>
+
+<p>それから継続的にCLに関わる論文がでたり、研究グループができたりしながら今に至っている。</p>
+
+<p>CL自体は概念的かつ、複数の機械学習分野を横断的に議論する必要のある話なので、これまでいろいろな学会にワークショップ・論文が登場している。<br />
+以下にワークショップとチュートリアルへのリンクを挙げておく。</p>
+
+<ul>
+<li>NeurIPS (NIPS)
+
+<ul>
+<li><a href="https://sites.google.com/site/cldlnips2016/home">Continual Learning and Deep Networks Workshop NIPS 2016</a></li>
+<li><a href="https://sites.google.com/view/continual2018/home">Continual learning Workshop NeurIPS 2018</a>
+
+<ul>
+<li><a href="https://vimeo.com/306721166">Mark Ringによるイントロのビデオ</a></li>
+</ul></li>
+</ul></li>
+<li>ICML (FAIM)
+
+<ul>
+<li><a href="http://rlabstraction2016.wixsite.com/icml-2017">Lifelong Learning: A Reinforcement Learning Approach ICML WORKSHOP 2017</a></li>
+<li><a href="https://sites.google.com/view/llarla2018/home">Lifelong Learning: A Reinforcement Learning Approach Workshop at FAIM 2018</a></li>
+</ul></li>
+<li>CVPR
+
+<ul>
+<li><a href="https://erodner.github.io/continuouslearningcvpr2017/">Continuous and Open-Set Learning Workshop @CVPR 2017</a></li>
+</ul></li>
+<li>IJCAI
+
+<ul>
+<li><a href="https://www.cs.uic.edu/~liub/IJCAI15-tutorial.html">Lifelong Machine Learning in the Big Data Era - Tutorial at IJCAI 2015</a></li>
+</ul></li>
+<li>KDD
+
+<ul>
+<li><a href="https://www.cs.uic.edu/~liub/Lifelong-Machine-Learning-Tutorial-KDD-2016.pdf">Lifelong Machine Learning and Computer Reading the Web - Tutorial at KDD 2016</a></li>
+</ul></li>
+<li>AAAI
+
+<ul>
+<li><a href="https://cs.brynmawr.edu/~eeaton/AAAI-SSS13-LML/">Lifelong Machine Learning - part of AAAI 2013 Spring Symposium Series</a></li>
+</ul></li>
+</ul>
+
+<p>有志によるアカデミックコミュニティも存在する。</p>
+
+<ul>
+<li><a href="https://www.continualai.org/home/">Continual AI</a></li>
+</ul>
+
+<p>残念ながら日本語で詳しく説明された資料はほとんど存在しない。<br />
+CLについて取り扱っているものを以下にリストアップしておく。</p>
+
+<ul>
+<li><a href="https://www.slideshare.net/unnonouno/ella-24077958">ICML2013読み会 ELLA: An Efficient Lifelong Learning Algorithm</a>
+
+<ul>
+<li>PFN海野さんによるICML&rsquo;13のCLに関する論文の解説スライド, CLの問題設定についても少し言及してある</li>
+</ul></li>
+<li><a href="https://qiita.com/yu4u/items/8b1e4f1c04460b89cac2">ニューラルネットワークが持つ欠陥「破滅的忘却」を回避するアルゴリズムをDeepMindが開発した論文を読んだ - Qiita</a>
+
+<ul>
+<li>yu4uさんによる、Deep Mindの<a href="https://www.pnas.org/content/114/13/3521">Overcoming catastrophic forgetting in neural networks</a>の解説, CL自体の話は少なめだがelastic weight consolidationについて解説されている</li>
+</ul></li>
+<li><a href="https://wba-initiative.org/wp-content/uploads/2015/05/20161008-hack2-noguchi.pdf">複数のゲームにおけるcontinual learning (pdf)</a>
+
+<ul>
+<li>慶応大の野口さんによるCLに着想を得た複数ゲームの学習モデル実装の話, 序盤に知識の再利用についての説明がある</li>
+</ul></li>
+</ul>
+
+<h1 id="clの問題設定">CLの問題設定</h1>
+
+<h2 id="cl-precondition-and-goal">CL: Precondition and Goal</h2>
+
+<p>前で紹介したNeurIPS 2018でのワークショップイントロでは、</p>
+
+<ol>
+<li>学習器はインタラクション可能なエージェントであること</li>
+<li>エージェントは不特定多数のタスクを学習できること</li>
+<li>エージェントは、下記の制約のもとで、シーン（センサ入力・観測値）、アクション、報酬を通じて環境に作用して<strong>将来の報酬を最大化する</strong>こと
+
+<ul>
+<li>初期状態（t=0）が一度しかない</li>
+<li>単一のアルゴリズムで動作し、アルゴリズム自体が不変であること</li>
+<li>計算リソースは有限であること（学習が進むにつれて計算時間やメモリ使用量が増えてはいけない）</li>
+</ul></li>
+</ol>
+
+<p>がCLの問題設定だと言っている。</p>
+
+<p>あくまでRingの見方ではあるので、現行の研究ではこれを緩和したり再解釈したりしているものも存在するだろう。<br />
+学習過程ででアルゴリズムが変化してもいいんじゃないかという話はあると思うし（メタ学習とか入ってくるとややこしい話になる）、<br />
+途中でエージェントの世代交代を導入（初期状態が複数回存在する）したいという考えもあるんじゃないかな。</p>
+
+<h2 id="cl-difficulties">CL: Difficulties</h2>
+
+<p>従来のマルチタスク学習と違うところを含めて、CLの研究課題はだいたい下記になると思う。</p>
+
+<ul>
+<li>与えられるタスクの数が不明</li>
+<li>与えられるタスクの順序が不明</li>
+<li>タスク同士の境界は与えられない</li>
+<li>スケーラビリティを保証する（有限な計算リソース）</li>
+<li>新しいタスクを学習することで破壊的忘却（catastrophic forgetting）が発生しない</li>
+<li>タスクを学習することで、次の新しいタスクを学習するコストが低減する</li>
+<li>新しいタスクを学習することで、これまで学習したタスクへの性能が向上する</li>
+</ul>
+
+<p>サーベイしてみると、catastrophic forgettingや新タスク学習コスト低減あたりを取り扱う研究が多そうだ。<br />
+タスク境界を教師なしで推定することや、新タスク学習によって既存タスク性能の向上を狙うところもかなり重要だと思う。</p>
+
+<p>複数の指標で多角的にモデルを評価できるようなベンチマークのやり方が決まってくればそれぞれ手を付ける人が増えてきそうな感もある。</p>
+
+<h1 id="主要論文リスト">主要論文リスト</h1>
+
+<p>探せば結構関連した論文は多く見つかるが、個人的に読んでおきたいものを中心にリストアップしておく。</p>
+
+<ul>
+<li><a href="http://people.idsia.ch/~ring/Ring-dissertation.pdf">Continual Learning in Reinforcement Environments</a>
+
+<ul>
+<li>Mark Ringの博士論文(&lsquo;94)</li>
+<li>おそらくCLについて言及している最初の論文</li>
+</ul></li>
+<li><a href="https://www.sciencedirect.com/science/article/pii/092188909500004Y">Lifelong Robot Learning</a>
+
+<ul>
+<li>Robotics and Autonomous Systems (Volume 15), &lsquo;95</li>
+<li>Tom Mitchell (CMU)</li>
+</ul></li>
+<li><a href="https://ieeexplore.ieee.org/document/983933">Learn++: an incremental learning algorithm for supervised neural networks</a>
+
+<ul>
+<li>IEEE Transactions on Systems, Man, and Cybernetics, Part C (Volume 31) &lsquo;01</li>
+<li>ニューラルネットワークの追加学習アルゴリズムの古典的論文</li>
+</ul></li>
+<li><a href="http://proceedings.mlr.press/v28/ruvolo13.pdf">ELLA: An Efficient Lifelong Learning Algorithm</a>
+
+<ul>
+<li>ICML&rsquo;13</li>
+<li>Eric Eatonのチーム</li>
+<li>マルチタスク学習アルゴリズム(GO-MTL)をCL向けにオンライン学習アルゴリズム化</li>
+</ul></li>
+<li><a href="https://cacm.acm.org/magazines/2018/5/227193-never-ending-learning/fulltext">Never-Ending Learning</a>
+
+<ul>
+<li>AAAI&rsquo;15</li>
+<li>Tom Mitchell (CMU)</li>
+</ul></li>
+<li><a href="https://arxiv.org/abs/1606.09282">Learning without Forgetting</a>
+
+<ul>
+<li>ECCV&rsquo;16</li>
+<li>Derek Hoiem</li>
+</ul></li>
+<li><a href="https://www.pnas.org/content/114/13/3521">Overcoming catastrophic forgetting in neural networks</a>
+
+<ul>
+<li>PANS&rsquo;17</li>
+<li>Raia Hadsellのチーム (Deep Mind)</li>
+<li>elastic weight consolidation論文</li>
+<li>arXiv版: <a href="https://arxiv.org/abs/1612.00796">https://arxiv.org/abs/1612.00796</a></li>
+</ul></li>
+<li><a href="https://arxiv.org/abs/1705.08395">Continual Learning in Generative Adversarial Nets</a>
+
+<ul>
+<li>arXiv:1705.08395</li>
+<li>Han Liuのチーム
+
+<ul>
+<li>詳細は不明、あまりこの分野の研究をしているチームじゃなさそう</li>
+</ul></li>
+<li>生成タスクでCatastrophic Forgettingの解決にトライしている</li>
+</ul></li>
+<li><a href="https://arxiv.org/abs/1706.08840">Gradient Episodic Memory for Continual Learning</a>
+
+<ul>
+<li>NIPS&rsquo;17</li>
+<li>Marc&rsquo;Aurelio Ranzatoのチーム（FAIR）</li>
+<li>Gradient Episodic Memory (GEM)論文</li>
+<li>実装: <a href="https://github.com/facebookresearch/GradientEpisodicMemory">https://github.com/facebookresearch/GradientEpisodicMemory</a></li>
+</ul></li>
+<li><a href="https://arxiv.org/abs/1802.07569">Continual Lifelong Learning with Neural Networks: A Review</a>
+
+<ul>
+<li>arXiv:1802.07569</li>
+<li>CLのサーベイ論文</li>
+</ul></li>
+<li><a href="https://arxiv.org/abs/1805.09733">Towards Robust Evaluations of Continual Learning</a>
+
+<ul>
+<li>FAIM (ICML Workshop) &lsquo;18</li>
+<li>Yarin Galのチーム（Oxford）</li>
+</ul></li>
+<li><a href="https://openreview.net/forum?id=ryGvcoA5YX">Overcoming Catastrophic Forgetting via Model Adaptation</a>
+
+<ul>
+<li>ICLR&rsquo;19</li>
+<li>Bing Liuのチーム</li>
+<li>Catastrophic Forgettingの話</li>
+</ul></li>
+<li><a href="https://openreview.net/forum?id=Hkf2_sC5FX">Efficient Lifelong Learning with A-GEM</a>
+
+<ul>
+<li>ICLR&rsquo;19</li>
+<li>Marc&rsquo;Aurelio Ranzatoのチーム（FAIR）</li>
+<li>Gradient Episodic Memory (GEM)の続編</li>
+</ul></li>
+</ul></div>
+</div>
+  <div class="footer-content">
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" href="https://github.com/dshmk">GitHub</a>
+      </li>
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" href="https://twitter.com/dshmki">Twitter</a>
+      </li>
+      <li class="pure-menu-item">
+        <a href="https://blog.dshmk.com/index.xml" class="pure-menu-link">RSS</a>
+      </li>
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" id="btn-gototop">
+          <span class="fixup">&#x21e7;&#xfe0e;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item pure-menu-disabled">
+        &copy; 2019 &mdash; dshmk.com — All rights reserved.
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  function setElementsClass(selector, value) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll(selector),
+      function(elem) { elem.className = value; }
+    );
+  }
+
+  setElementsClass('img', 'pure-img');
+  setElementsClass('table', 'pure-table');
+
+  function onResize() {
+      setElementsClass(
+        '.pure-menu', document.documentElement.clientWidth >= 568 ?
+              'pure-menu pure-menu-horizontal' : 'pure-menu'
+      );
+  }
+  onResize();
+  window.addEventListener('resize', onResize);
+
+  document.getElementById('btn-gototop').addEventListener('click', function() {
+    function scroll() {
+      if (window.pageYOffset > 0) { setTimeout(scroll, 8); }
+      window.scroll(0, window.pageYOffset - 128);
+    }
+    scroll();
+  });
+</script>
+
+  </div>
+  <div class="pure-u-1-24 pure-u-md-5-24"></div>
+</div>
+</body>
+</html>

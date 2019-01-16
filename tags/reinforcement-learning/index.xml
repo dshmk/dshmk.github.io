@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Reinforcement Learning on dshmk.com</title>
+		<link>https://blog.dshmk.com/tags/reinforcement-learning/</link>
+		<description>Recent content in Reinforcement Learning on dshmk.com</description>
+		<generator>Hugo 0.53 -- gohugo.io</generator>
+		<language>ja-JP</language>
+		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
+		<webMaster>egg@dshmk.com (dshmk)</webMaster>
+		<copyright>dshmk.com — All rights reserved.</copyright>
+		<lastBuildDate>Tue, 15 Jan 2019 21:09:36 +0900</lastBuildDate>
+		<atom:link href="https://blog.dshmk.com/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+		<item>
+			<title>Continual Learning (Lifelong Machine Learning) のことを調べた</title>
+			<link>https://blog.dshmk.com/posts/survey/continual-learning-servey/</link>
+			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/posts/survey/continual-learning-servey/</guid>
+			<description>&lt;p&gt;Continual Learning (今のところ和訳は特に当てられていないようだ）について簡単に調べたので、まとめておく。&lt;br /&gt;
+何も考えずに和訳を当てるとすると、&amp;rdquo;継続学習&amp;rdquo;といったところだろうか。&lt;/p&gt;
+
+&lt;h1 id=&#34;continual-learning-lifelong-machine-learning-overview&#34;&gt;Continual Learning / Lifelong (Machine) Learning: Overview&lt;/h1&gt;
+
+&lt;h2 id=&#34;呼び方について&#34;&gt;呼び方について&lt;/h2&gt;
+
+&lt;p&gt;Continual LearningもしくはLifelong (Machine) Learningと呼ばれることが多いようだ。&lt;/p&gt;
+
+&lt;p&gt;NeurIPS 2018のワークショップ名は&amp;rdquo;Continual Learning&amp;rdquo;なので、こちらがメジャーな呼称のように見えるが、&lt;br /&gt;
+ワークショップに投稿されている論文のタイトルを見るとどちらも登場しているので、英語でもまだ定まっていないように見える。&lt;/p&gt;
+
+&lt;p&gt;Lifelong~は生涯学習を指すので、個人的にはActive Learningのように教育系のタームと被らないContinualのほうが良いとおもうが…&lt;br /&gt;
+ちなみに、サーベイ中に生涯学習の意味で&amp;rdquo;Lifelong Learning&amp;rdquo;と記述している情報系の論文にも遭遇した。&lt;/p&gt;
+
+&lt;p&gt;ここでは面倒なので、Continual Learningもしくはその頭文字を取ってCLとする（しかし、CLだとCurriculum Learningともかぶるな…）。&lt;/p&gt;
+
+&lt;h2 id=&#34;歴史&#34;&gt;歴史&lt;/h2&gt;
+
+&lt;p&gt;おそらくCLの概念を言い出したのは、Cogitaiのファウンダーの&lt;a href=&#34;https://www.cs.utexas.edu/~ring/&#34;&gt;Mark Ring&lt;/a&gt;が1994年に出した
+&lt;a href=&#34;http://people.idsia.ch/~ring/Ring-dissertation.pdf&#34;&gt;博士論文（pdf）&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;ここで彼は、機械学習で新たな知識を学習する際に、すでに学習・習得した知識を再利用するように学習されるべきで、そのために&lt;br /&gt;
+&lt;strong&gt;継続的かつ、階層的かつ、追加的に学習できるフレームワークが必要&lt;/strong&gt;&lt;br /&gt;
+だと主張している。&lt;/p&gt;
+
+&lt;p&gt;それから継続的にCLに関わる論文がでたり、研究グループができたりしながら今に至っている。&lt;/p&gt;
+
+&lt;p&gt;CL自体は概念的かつ、複数の機械学習分野を横断的に議論する必要のある話なので、これまでいろいろな学会にワークショップ・論文が登場している。&lt;br /&gt;
+以下にワークショップとチュートリアルへのリンクを挙げておく。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;NeurIPS (NIPS)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://sites.google.com/site/cldlnips2016/home&#34;&gt;Continual Learning and Deep Networks Workshop NIPS 2016&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sites.google.com/view/continual2018/home&#34;&gt;Continual learning Workshop NeurIPS 2018&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://vimeo.com/306721166&#34;&gt;Mark Ringによるイントロのビデオ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ICML (FAIM)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://rlabstraction2016.wixsite.com/icml-2017&#34;&gt;Lifelong Learning: A Reinforcement Learning Approach ICML WORKSHOP 2017&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sites.google.com/view/llarla2018/home&#34;&gt;Lifelong Learning: A Reinforcement Learning Approach Workshop at FAIM 2018&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;CVPR
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://erodner.github.io/continuouslearningcvpr2017/&#34;&gt;Continuous and Open-Set Learning Workshop @CVPR 2017&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;IJCAI
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cs.uic.edu/~liub/IJCAI15-tutorial.html&#34;&gt;Lifelong Machine Learning in the Big Data Era - Tutorial at IJCAI 2015&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;KDD
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cs.uic.edu/~liub/Lifelong-Machine-Learning-Tutorial-KDD-2016.pdf&#34;&gt;Lifelong Machine Learning and Computer Reading the Web - Tutorial at KDD 2016&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;AAAI
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://cs.brynmawr.edu/~eeaton/AAAI-SSS13-LML/&#34;&gt;Lifelong Machine Learning - part of AAAI 2013 Spring Symposium Series&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;有志によるアカデミックコミュニティも存在する。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.continualai.org/home/&#34;&gt;Continual AI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;残念ながら日本語で詳しく説明された資料はほとんど存在しない。&lt;br /&gt;
+CLについて取り扱っているものを以下にリストアップしておく。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.slideshare.net/unnonouno/ella-24077958&#34;&gt;ICML2013読み会 ELLA: An Efficient Lifelong Learning Algorithm&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PFN海野さんによるICML&amp;rsquo;13のCLに関する論文の解説スライド, CLの問題設定についても少し言及してある&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://qiita.com/yu4u/items/8b1e4f1c04460b89cac2&#34;&gt;ニューラルネットワークが持つ欠陥「破滅的忘却」を回避するアルゴリズムをDeepMindが開発した論文を読んだ - Qiita&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;yu4uさんによる、Deep Mindの&lt;a href=&#34;https://www.pnas.org/content/114/13/3521&#34;&gt;Overcoming catastrophic forgetting in neural networks&lt;/a&gt;の解説, CL自体の話は少なめだがelastic weight consolidationについて解説されている&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wba-initiative.org/wp-content/uploads/2015/05/20161008-hack2-noguchi.pdf&#34;&gt;複数のゲームにおけるcontinual learning (pdf)&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;慶応大の野口さんによるCLに着想を得た複数ゲームの学習モデル実装の話, 序盤に知識の再利用についての説明がある&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;clの問題設定&#34;&gt;CLの問題設定&lt;/h1&gt;
+
+&lt;h2 id=&#34;cl-precondition-and-goal&#34;&gt;CL: Precondition and Goal&lt;/h2&gt;
+
+&lt;p&gt;前で紹介したNeurIPS 2018でのワークショップイントロでは、&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;学習器はインタラクション可能なエージェントであること&lt;/li&gt;
+&lt;li&gt;エージェントは不特定多数のタスクを学習できること&lt;/li&gt;
+&lt;li&gt;エージェントは、下記の制約のもとで、シーン（センサ入力・観測値）、アクション、報酬を通じて環境に作用して&lt;strong&gt;将来の報酬を最大化する&lt;/strong&gt;こと
+
+&lt;ul&gt;
+&lt;li&gt;初期状態（t=0）が一度しかない&lt;/li&gt;
+&lt;li&gt;単一のアルゴリズムで動作し、アルゴリズム自体が不変であること&lt;/li&gt;
+&lt;li&gt;計算リソースは有限であること（学習が進むにつれて計算時間やメモリ使用量が増えてはいけない）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;がCLの問題設定だと言っている。&lt;/p&gt;
+
+&lt;p&gt;あくまでRingの見方ではあるので、現行の研究ではこれを緩和したり再解釈したりしているものも存在するだろう。&lt;br /&gt;
+学習過程ででアルゴリズムが変化してもいいんじゃないかという話はあると思うし（メタ学習とか入ってくるとややこしい話になる）、&lt;br /&gt;
+途中でエージェントの世代交代を導入（初期状態が複数回存在する）したいという考えもあるんじゃないかな。&lt;/p&gt;
+
+&lt;h2 id=&#34;cl-difficulties&#34;&gt;CL: Difficulties&lt;/h2&gt;
+
+&lt;p&gt;従来のマルチタスク学習と違うところを含めて、CLの研究課題はだいたい下記になると思う。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;与えられるタスクの数が不明&lt;/li&gt;
+&lt;li&gt;与えられるタスクの順序が不明&lt;/li&gt;
+&lt;li&gt;タスク同士の境界は与えられない&lt;/li&gt;
+&lt;li&gt;スケーラビリティを保証する（有限な計算リソース）&lt;/li&gt;
+&lt;li&gt;新しいタスクを学習することで破壊的忘却（catastrophic forgetting）が発生しない&lt;/li&gt;
+&lt;li&gt;タスクを学習することで、次の新しいタスクを学習するコストが低減する&lt;/li&gt;
+&lt;li&gt;新しいタスクを学習することで、これまで学習したタスクへの性能が向上する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;サーベイしてみると、catastrophic forgettingや新タスク学習コスト低減あたりを取り扱う研究が多そうだ。&lt;br /&gt;
+タスク境界を教師なしで推定することや、新タスク学習によって既存タスク性能の向上を狙うところもかなり重要だと思う。&lt;/p&gt;
+
+&lt;p&gt;複数の指標で多角的にモデルを評価できるようなベンチマークのやり方が決まってくればそれぞれ手を付ける人が増えてきそうな感もある。&lt;/p&gt;
+
+&lt;h1 id=&#34;主要論文リスト&#34;&gt;主要論文リスト&lt;/h1&gt;
+
+&lt;p&gt;探せば結構関連した論文は多く見つかるが、個人的に読んでおきたいものを中心にリストアップしておく。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://people.idsia.ch/~ring/Ring-dissertation.pdf&#34;&gt;Continual Learning in Reinforcement Environments&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Mark Ringの博士論文(&amp;lsquo;94)&lt;/li&gt;
+&lt;li&gt;おそらくCLについて言及している最初の論文&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/092188909500004Y&#34;&gt;Lifelong Robot Learning&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Robotics and Autonomous Systems (Volume 15), &amp;lsquo;95&lt;/li&gt;
+&lt;li&gt;Tom Mitchell (CMU)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ieeexplore.ieee.org/document/983933&#34;&gt;Learn++: an incremental learning algorithm for supervised neural networks&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IEEE Transactions on Systems, Man, and Cybernetics, Part C (Volume 31) &amp;lsquo;01&lt;/li&gt;
+&lt;li&gt;ニューラルネットワークの追加学習アルゴリズムの古典的論文&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://proceedings.mlr.press/v28/ruvolo13.pdf&#34;&gt;ELLA: An Efficient Lifelong Learning Algorithm&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ICML&amp;rsquo;13&lt;/li&gt;
+&lt;li&gt;Eric Eatonのチーム&lt;/li&gt;
+&lt;li&gt;マルチタスク学習アルゴリズム(GO-MTL)をCL向けにオンライン学習アルゴリズム化&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cacm.acm.org/magazines/2018/5/227193-never-ending-learning/fulltext&#34;&gt;Never-Ending Learning&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AAAI&amp;rsquo;15&lt;/li&gt;
+&lt;li&gt;Tom Mitchell (CMU)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1606.09282&#34;&gt;Learning without Forgetting&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ECCV&amp;rsquo;16&lt;/li&gt;
+&lt;li&gt;Derek Hoiem&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.pnas.org/content/114/13/3521&#34;&gt;Overcoming catastrophic forgetting in neural networks&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PANS&amp;rsquo;17&lt;/li&gt;
+&lt;li&gt;Raia Hadsellのチーム (Deep Mind)&lt;/li&gt;
+&lt;li&gt;elastic weight consolidation論文&lt;/li&gt;
+&lt;li&gt;arXiv版: &lt;a href=&#34;https://arxiv.org/abs/1612.00796&#34;&gt;https://arxiv.org/abs/1612.00796&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1705.08395&#34;&gt;Continual Learning in Generative Adversarial Nets&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;arXiv:1705.08395&lt;/li&gt;
+&lt;li&gt;Han Liuのチーム
+
+&lt;ul&gt;
+&lt;li&gt;詳細は不明、あまりこの分野の研究をしているチームじゃなさそう&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;生成タスクでCatastrophic Forgettingの解決にトライしている&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1706.08840&#34;&gt;Gradient Episodic Memory for Continual Learning&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;NIPS&amp;rsquo;17&lt;/li&gt;
+&lt;li&gt;Marc&amp;rsquo;Aurelio Ranzatoのチーム（FAIR）&lt;/li&gt;
+&lt;li&gt;Gradient Episodic Memory (GEM)論文&lt;/li&gt;
+&lt;li&gt;実装: &lt;a href=&#34;https://github.com/facebookresearch/GradientEpisodicMemory&#34;&gt;https://github.com/facebookresearch/GradientEpisodicMemory&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1802.07569&#34;&gt;Continual Lifelong Learning with Neural Networks: A Review&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;arXiv:1802.07569&lt;/li&gt;
+&lt;li&gt;CLのサーベイ論文&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1805.09733&#34;&gt;Towards Robust Evaluations of Continual Learning&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;FAIM (ICML Workshop) &amp;lsquo;18&lt;/li&gt;
+&lt;li&gt;Yarin Galのチーム（Oxford）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://openreview.net/forum?id=ryGvcoA5YX&#34;&gt;Overcoming Catastrophic Forgetting via Model Adaptation&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ICLR&amp;rsquo;19&lt;/li&gt;
+&lt;li&gt;Bing Liuのチーム&lt;/li&gt;
+&lt;li&gt;Catastrophic Forgettingの話&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://openreview.net/forum?id=Hkf2_sC5FX&#34;&gt;Efficient Lifelong Learning with A-GEM&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ICLR&amp;rsquo;19&lt;/li&gt;
+&lt;li&gt;Marc&amp;rsquo;Aurelio Ranzatoのチーム（FAIR）&lt;/li&gt;
+&lt;li&gt;Gradient Episodic Memory (GEM)の続編&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+		</item>
+	</channel>
+</rss>
