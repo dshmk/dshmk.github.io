@@ -20,9 +20,9 @@ jobs:
                 name: Publish
                 command: |
                     git clone --recursive https://github.com/dshmk/blog.dshmk.com.git ../source
-                    pushd ../ && hugo -v && popd
+                    pushd ../source && hugo -v && popd
                     git remote set-url origin https://github.com/dshmk/dshmk.github.io.git
-                    cp -rp ../blog.dshmk.com/public/* ./
+                    cp -rp ../source/public/* ./
                     git add .
                     git commit -am "[ci skip] PUBLISH :pencil2:"
                     git push origin master
