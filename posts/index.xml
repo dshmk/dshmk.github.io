@@ -4,13 +4,63 @@
 		<title>Posts on dshmk.com</title>
 		<link>https://blog.dshmk.com/posts/</link>
 		<description>Recent content in Posts on dshmk.com</description>
-		<generator>Hugo 0.53 -- gohugo.io</generator>
+		<generator>Hugo 0.54.0 -- gohugo.io</generator>
 		<language>ja-JP</language>
 		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
 		<webMaster>egg@dshmk.com (dshmk)</webMaster>
 		<copyright>dshmk.com — All rights reserved.</copyright>
-		<lastBuildDate>Tue, 15 Jan 2019 21:09:36 +0900</lastBuildDate>
+		<lastBuildDate>Tue, 12 Mar 2019 00:24:17 +0900</lastBuildDate>
 		<atom:link href="https://blog.dshmk.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		<item>
+			<title>Vue.jsのプロジェクトを立ち上げてgitにpushするまでのメモ</title>
+			<link>https://blog.dshmk.com/posts/web/vue-js-01/</link>
+			<pubDate>Tue, 12 Mar 2019 00:24:17 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/posts/web/vue-js-01/</guid>
+			<description>&lt;p&gt;数カ月前にVue.jsをやって、時間を空けたら脳内リセットされていた。&lt;br /&gt;
+ちゃんとメモる。&lt;/p&gt;
+
+&lt;h1 id=&#34;前提&#34;&gt;前提&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;node --version
+&lt;span class=&#34;c1&#34;&gt;# v8.9.4&lt;/span&gt;
+npm --version
+&lt;span class=&#34;c1&#34;&gt;# 5.6.0&lt;/span&gt;
+sudo npm install -g @vue/cli
+vue --version
+&lt;span class=&#34;c1&#34;&gt;# 3.5.0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;vue-jsのプロジェクトを作成する&#34;&gt;Vue.jsのプロジェクトを作成する&lt;/h1&gt;
+
+&lt;p&gt;今回はビデオアノテーション用のプロジェクトなので、そんな感じの命名でいく。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;vue create video-anno-web&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;なにも考えず、デフォルトを選ぶと勝手にセットアップしてくれるっぽい。&lt;br /&gt;
+ご丁寧にREADME.mdまで作られている。&lt;/p&gt;
+
+&lt;p&gt;REAMEに従って、残りのセットアップとhot-reloadsを起動する。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;npm install
+npm run serve&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;とりあえず、プロジェクトの雛形ができた。&lt;/p&gt;
+
+&lt;figure class=&#34;center&#34;&gt;
+    &lt;img src=&#34;https://dl.dropboxusercontent.com/s/d1ixhchdysth9z5/vue-first-step-run.png&#34;
+         alt=&#34;My first vue page&#34; width=&#34;640&#34;/&gt; 
+&lt;/figure&gt;
+
+
+&lt;h1 id=&#34;gitリポジトリにコミットする&#34;&gt;Gitリポジトリにコミットする&lt;/h1&gt;
+
+&lt;p&gt;なぜか、&lt;code&gt;git commit&lt;/code&gt;を打つ必要がなかった…。なぜだ。&lt;br /&gt;
+とにかくVue.jsがgitで管理しやすいように&lt;code&gt;.gitignore&lt;/code&gt;含めて良しなにやってくれている。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;git init
+git remote add origin https://github.com/dshmk/video-anno-web.git
+git add .
+git push origin master&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;iframe style=&#34;width:120px;height:240px;&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; frameborder=&#34;0&#34; src=&#34;https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&amp;t=dshmk-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=4297100916&amp;linkId=f279d340e1856e66ebe68f905cba045d&amp;bc1=ffffff&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr&#34;&gt;&lt;/iframe&gt;
+&lt;iframe style=&#34;width:120px;height:240px;&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; frameborder=&#34;0&#34; src=&#34;https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;t=dshmk-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=4863542453&amp;linkId=b787185fb7e5229ecba2004840afabd7&amp;bc1=000000&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr&#34;&gt;&lt;/iframe&gt;
+&lt;iframe style=&#34;width:120px;height:240px;&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; frameborder=&#34;0&#34; src=&#34;https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&amp;t=dshmk-22&amp;m=amazon&amp;o=9&amp;p=8&amp;l=as1&amp;IS2=1&amp;detail=1&amp;asins=4844398431&amp;linkId=1ce9419e4df96e1900066c9d1d309188&amp;bc1=000000&amp;lt1=_blank&amp;fc1=333333&amp;lc1=0066c0&amp;bg1=ffffff&amp;f=ifr&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;</description>
+		</item>
 		<item>
 			<title>Continual Learning (Lifelong Machine Learning) のことを調べた</title>
 			<link>https://blog.dshmk.com/posts/survey/continual-learning-servey/</link>

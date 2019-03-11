@@ -4,7 +4,7 @@
 		<title>Tags on dshmk.com</title>
 		<link>https://blog.dshmk.com/tags/</link>
 		<description>Recent content in Tags on dshmk.com</description>
-		<generator>Hugo 0.53 -- gohugo.io</generator>
+		<generator>Hugo 0.54.0 -- gohugo.io</generator>
 		<language>ja-JP</language>
 		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
 		<webMaster>egg@dshmk.com (dshmk)</webMaster>
@@ -33,6 +33,14 @@
 			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
 			<author>egg@dshmk.com (dshmk)</author>
 			<guid>https://blog.dshmk.com/tags/reinforcement-learning/</guid>
+			<description></description>
+		</item>
+		<item>
+			<title>Vue.js</title>
+			<link>https://blog.dshmk.com/tags/vue.js/</link>
+			<pubDate>Tue, 12 Mar 2019 00:24:17 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/tags/vue.js/</guid>
 			<description></description>
 		</item>
 	</channel>

@@ -2,10 +2,11 @@
 <html lang="ja-JP">
 <head>
   <meta charset="utf-8" />
-  <title>Survey | dshmk.com</title>
+  <title>Vue.jsのプロジェクトを立ち上げてgitにpushするまでのメモ | dshmk.com</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="データサイエンスやエンジニアリングのメモ" />
+  <meta name="description" content="数カ月前にVue.jsをやって、時間を空けたら脳内リセットされていた。
+ちゃんとメモる。" />
   <meta name="author" content="dshmk" />
   <meta name="generator" content="Hugo 0.54.0" />
   <link href="https://blog.dshmk.com/index.xml" rel="alternate" type="application/rss+xml" title="dshmk.com Feed" />
@@ -52,49 +53,65 @@
 
   
 <div>
-  <p>Survey:</p>
-  <ul>
-    <li>
-      <div class="post-title">
-        <a href="https://blog.dshmk.com/posts/survey/continual-learning-servey/">Continual Learning (Lifelong Machine Learning) のことを調べた</a>
-      </div>
-      <div class="post-meta">
+  <div>
+    <h1 class="post-title">Vue.jsのプロジェクトを立ち上げてgitにpushするまでのメモ</h1>
+    <div class="post-meta">
   Date &#x5b;
-    <time datetime="2019-01-15T21:09:36&#43;09:00">15 Jan 19 21:09 JST</time>
+    <time datetime="2019-03-12T00:24:17&#43;09:00">12 Mar 19 00:24 JST</time>
   &#x5d;
   Categories &#x5b;
-                <a href="https://blog.dshmk.com/categories/survey/">survey</a>
+                <a href="https://blog.dshmk.com/categories/web/">web</a>
   &#x5d;
   Tags &#x5b;
-                <a href="https://blog.dshmk.com/tags/continual-learning/">&#x23;Continual Learning</a>
-            &#x20;&#x7c;&#x20;
-                <a href="https://blog.dshmk.com/tags/reinforcement-learning/">&#x23;Reinforcement Learning</a>
-            &#x20;&#x7c;&#x20;
-                <a href="https://blog.dshmk.com/tags/paper/">&#x23;paper</a>
+                <a href="https://blog.dshmk.com/tags/vue.js/">&#x23;vue.js</a>
   &#x5d;
 </div>
 
-    </li>
-  </ul>
-</div>
-
-
-<div class="pagination-content">
-  <div class="pure-menu pure-menu-horizontal">
-    <ul class="pure-menu-list">
-      <span class="pure-menu-item pure-menu-disabled">
-        Pages
-      </span>
-      <li class="pure-menu-item pure-menu-selected">
-        <a href="https://blog.dshmk.com/categories/survey/" class="pure-menu-link">First</a>
-      </li>
-      <li class="pure-menu-item pure-menu-selected">
-        <a href="https://blog.dshmk.com/categories/survey/" class="pure-menu-link">Last</a>
-      </li>
-    </ul>
   </div>
-</div>
+  <div><p>数カ月前にVue.jsをやって、時間を空けたら脳内リセットされていた。<br />
+ちゃんとメモる。</p>
 
+<h1 id="前提">前提</h1>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">node --version
+<span class="c1"># v8.9.4</span>
+npm --version
+<span class="c1"># 5.6.0</span>
+sudo npm install -g @vue/cli
+vue --version
+<span class="c1"># 3.5.0</span></code></pre></div>
+<h1 id="vue-jsのプロジェクトを作成する">Vue.jsのプロジェクトを作成する</h1>
+
+<p>今回はビデオアノテーション用のプロジェクトなので、そんな感じの命名でいく。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">vue create video-anno-web</code></pre></div>
+<p>なにも考えず、デフォルトを選ぶと勝手にセットアップしてくれるっぽい。<br />
+ご丁寧にREADME.mdまで作られている。</p>
+
+<p>REAMEに従って、残りのセットアップとhot-reloadsを起動する。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">npm install
+npm run serve</code></pre></div>
+<p>とりあえず、プロジェクトの雛形ができた。</p>
+
+<figure class="center">
+    <img src="https://dl.dropboxusercontent.com/s/d1ixhchdysth9z5/vue-first-step-run.png"
+         alt="My first vue page" width="640"/> 
+</figure>
+
+
+<h1 id="gitリポジトリにコミットする">Gitリポジトリにコミットする</h1>
+
+<p>なぜか、<code>git commit</code>を打つ必要がなかった…。なぜだ。<br />
+とにかくVue.jsがgitで管理しやすいように<code>.gitignore</code>含めて良しなにやってくれている。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">git init
+git remote add origin https://github.com/dshmk/video-anno-web.git
+git add .
+git push origin master</code></pre></div>
+<hr />
+
+<p><br />
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=qf_sp_asin_til&t=dshmk-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4297100916&linkId=f279d340e1856e66ebe68f905cba045d&bc1=ffffff&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=dshmk-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4863542453&linkId=b787185fb7e5229ecba2004840afabd7&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=dshmk-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4844398431&linkId=1ce9419e4df96e1900066c9d1d309188&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe></p></div>
+</div>
   <div class="footer-content">
   <div class="pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
