@@ -1,10 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.dshmk.com/categories/</loc>
+    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.dshmk.com/</loc>
+    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.dshmk.com/posts/</loc>
+    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.dshmk.com/tags/</loc>
+    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.dshmk.com/tags/vue.js/</loc>
+    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.dshmk.com/posts/web/vue-js-01/</loc>
     <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.dshmk.com/categories/web/</loc>
+    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.dshmk.com/tags/continual-learning/</loc>
+    <lastmod>2019-01-15T21:09:36+09:00</lastmod>
   </url>
   
   <url>
@@ -13,67 +48,22 @@
   </url>
   
   <url>
-    <loc>https://blog.dshmk.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.dshmk.com/tags/continual-learning/</loc>
-    <lastmod>2019-01-15T21:09:36+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.dshmk.com/tags/paper/</loc>
     <lastmod>2019-01-15T21:09:36+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.dshmk.com/posts/</loc>
-    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.dshmk.com/tags/reinforcement-learning/</loc>
     <lastmod>2019-01-15T21:09:36+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.dshmk.com/series/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.dshmk.com/categories/survey/</loc>
     <lastmod>2019-01-15T21:09:36+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://blog.dshmk.com/tags/</loc>
-    <lastmod>2019-01-15T21:09:36+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.dshmk.com/tags/vue.js/</loc>
-    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.dshmk.com/categories/web/</loc>
-    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.dshmk.com/</loc>
-    <lastmod>2019-03-12T00:24:17+09:00</lastmod>
-    <priority>0</priority>
+    <loc>https://blog.dshmk.com/series/</loc>
   </url>
   
 </urlset>

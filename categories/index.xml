@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Categories on dshmk.com</title>
 		<link>https://blog.dshmk.com/categories/</link>
 		<description>Recent content in Categories on dshmk.com</description>
-		<generator>Hugo 0.54.0 -- gohugo.io</generator>
+		<generator>Hugo 0.60.1 -- gohugo.io</generator>
 		<language>ja-JP</language>
 		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
 		<webMaster>egg@dshmk.com (dshmk)</webMaster>
 		<copyright>dshmk.com — All rights reserved.</copyright>
+		<lastBuildDate>Tue, 12 Mar 2019 00:24:17 +0900</lastBuildDate>
 		<atom:link href="https://blog.dshmk.com/categories/index.xml" rel="self" type="application/rss+xml" />
 		<item>
-			<title>Survey</title>
-			<link>https://blog.dshmk.com/categories/survey/</link>
-			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
-			<author>egg@dshmk.com (dshmk)</author>
-			<guid>https://blog.dshmk.com/categories/survey/</guid>
-			<description></description>
-		</item>
-		<item>
-			<title>Web</title>
+			<title>web</title>
 			<link>https://blog.dshmk.com/categories/web/</link>
 			<pubDate>Tue, 12 Mar 2019 00:24:17 +0900</pubDate>
 			<author>egg@dshmk.com (dshmk)</author>
 			<guid>https://blog.dshmk.com/categories/web/</guid>
+			<description></description>
+		</item>
+		<item>
+			<title>survey</title>
+			<link>https://blog.dshmk.com/categories/survey/</link>
+			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/categories/survey/</guid>
 			<description></description>
 		</item>
 	</channel>
