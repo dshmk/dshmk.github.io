@@ -8,22 +8,22 @@
 		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
 		<webMaster>egg@dshmk.com (dshmk)</webMaster>
 		<copyright>dshmk.com — All rights reserved.</copyright>
-		<lastBuildDate>Tue, 12 Mar 2019 00:24:17 +0900</lastBuildDate>
+		<lastBuildDate>Sat, 07 Dec 2019 23:53:40 +0900</lastBuildDate>
 		<atom:link href="https://blog.dshmk.com/categories/index.xml" rel="self" type="application/rss+xml" />
+		<item>
+			<title>survey</title>
+			<link>https://blog.dshmk.com/categories/survey/</link>
+			<pubDate>Sat, 07 Dec 2019 23:53:40 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/categories/survey/</guid>
+			<description></description>
+		</item>
 		<item>
 			<title>web</title>
 			<link>https://blog.dshmk.com/categories/web/</link>
 			<pubDate>Tue, 12 Mar 2019 00:24:17 +0900</pubDate>
 			<author>egg@dshmk.com (dshmk)</author>
 			<guid>https://blog.dshmk.com/categories/web/</guid>
-			<description></description>
-		</item>
-		<item>
-			<title>survey</title>
-			<link>https://blog.dshmk.com/categories/survey/</link>
-			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
-			<author>egg@dshmk.com (dshmk)</author>
-			<guid>https://blog.dshmk.com/categories/survey/</guid>
 			<description></description>
 		</item>
 	</channel>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="utf-8" />
+  <title>僕はロボットのための認識器をつくりたい | dshmk.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="彌冨研 Advent Calendar 2019 7日目の記事です。
+最初はエッジAI推論の話を書こうと思ったんだけど、まずはその前になんでそういうことやっているかを話そうと思います。
+別に時間がなくてとかそういう理由ではないです。うん。" />
+  <meta name="author" content="dshmk" />
+  <meta name="generator" content="Hugo 0.60.1" />
+  <link href="https://blog.dshmk.com/index.xml" rel="alternate" type="application/rss+xml" title="dshmk.com Feed" />
+  <link rel="shortcut icon" href="https://blog.dshmk.com/img/favicon.ico" type="image/x-icon" />
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://blog.dshmk.com/assets/style-compat.css" />
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://blog.dshmk.com/assets/style.css" />
+  <!--<![endif]-->
+</head>
+<body>
+<div class="pure-g">
+  <div class="pure-u-1-24 pure-u-md-5-24"></div>
+  <div class="pure-u-22-24 pure-u-md-14-24">
+  <div class="navigation-header">
+  <div class="pure-menu pure-menu-horizontal">
+    <a class="pure-menu-heading pure-menu-link" href="https://blog.dshmk.com/">
+      dshmk.com
+    </a>
+    <ul class="pure-menu-list pull-end navigation-header-subtitle">
+      <li class="pure-menu-item pure-menu-disabled">Making the World Computable</li>
+    </ul>
+  </div>
+</div>
+<div class="navigation-content">
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/posts/">Posts</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/categories/">Categories</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/series/">Series</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/tags/">Tags</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+  
+<div>
+  <div>
+    <h1 class="post-title">僕はロボットのための認識器をつくりたい</h1>
+    <div class="post-meta">
+  Date &#x5b;
+    <time datetime="2019-12-07T23:53:40&#43;09:00">07 Dec 19 23:53 JST</time>
+  &#x5d;
+  Categories &#x5b;
+                <a href="https://blog.dshmk.com/categories/survey/">survey</a>
+  &#x5d;
+  Tags &#x5b;
+                <a href="https://blog.dshmk.com/tags/robot/">&#x23;robot</a>
+            &#x20;&#x7c;&#x20;
+                <a href="https://blog.dshmk.com/tags/paper/">&#x23;paper</a>
+  &#x5d;
+</div>
+
+  </div>
+  <div><p>彌冨研 Advent Calendar 2019 7日目の記事です。<br>
+最初はエッジAI推論の話を書こうと思ったんだけど、まずはその前になんでそういうことやっているかを話そうと思います。<br>
+別に時間がなくてとかそういう理由ではないです。うん。</p>
+<h1 id="heading">簡単な自己紹介</h1>
+<p>彌冨研は卒業してから3年くらい経ちます。<br>
+あの頃、僕が先生に「ディープラーニングっていうすごい技術があるんでこれで人間みたいな画像認識作りたいです」って言い出したんですが、<br>
+当時僕が思っていたよりもディープラーニングが盛り上がり、本当にたくさんのことができるようになりました。<br>
+とはいえいつも真面目に研究していたわけでなく、勝手に研究室のマシン名前つけたり、朝までSlack bot作ったり、研究と関係ないもの作ったりしてました。</p>
+<h1 id="heading1">システムが物理的に作用する世界</h1>
+<p>インターネットのような通信技術が進歩して、情報のや記号のやりとりで済んでいたもの（決済や認証など）はすっかりIT技術で取って代わられてしまいました。<br>
+とはいえ、物理世界に直接作用できているのは本当に少なくて、まだまだ人間が運転する乗り物に乗ったり人間が運んだ荷物をやり取りしたりしているわけです。<br>
+そう考えたときに、やっぱりシステムがアクチュエータを介して直接作用できるようになるのって夢があるなって思うわけです。<br>
+とはいえ、例えばロボットであれば、環境の認識&ndash;&gt;行動計画&ndash;&gt;制御 というサイクルを回しつづけるんですが、全部一人でやるのはちょっと大変です。<br>
+僕は、まずは環境をちゃんと理解しましょうということで認識部分に興味があって研究したりしています。</p>
+<p>ということで、今日は実世界で我々と一緒に生活できるシステムを作るために、どんな認識技術が必要なのか考えてみたいと思います。</p>
+<h2 id="edge-ai-">Edge AI: リアルタイムに認識する</h2>
+<p>まずは、その場で即座に環境の情報を制御システムに渡してやる必要を考えないといけません。<br>
+そのためには、軽量で、できれば低消費電力で動く認識器がほしいわけです。</p>
+<p>最近ではスマホ上で認識器を動かしたいというモチベーションもあり、軽量ディープラーニングアーキテクチャの研究がだいぶ出ています。</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1801.04381">MobileNetV2: Inverted Residuals and Linear Bottlenecks</a></li>
+<li><a href="https://arxiv.org/abs/1812.00332">ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware</a></li>
+<li><a href="https://arxiv.org/abs/1905.11946">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a></li>
+</ul>
+<p>それと、推論時用にニューラルネットワークのグラフ構造を最適化する技術もだいぶ使われています。<br>
+せっかく軽いネットワークにしたわけだから、プロセッサにとって無駄のない処理に仕上げる必要があります。<br>
+たとえば、Batch NormalizationとConvolutionは実行時には一つのレイヤーにまとめることができます。</p>
+<ul>
+<li><a href="https://tehnokv.com/posts/fusing-batchnorm-and-conv/">Fusing batch normalization and convolution in runtime</a></li>
+<li><a href="https://github.com/microsoft/onnxruntime/blob/master/docs/ONNX_Runtime_Graph_Optimizations.md">Graph Optimizations in ONNX Runtime</a></li>
+<li><a href="https://arxiv.org/abs/1802.04799">TVM: An Automated End-to-End Optimizing Compiler for Deep Learning</a></li>
+</ul>
+<h2 id="multicross-modal-">Multi/Cross Modal: 各感覚器入力を統合してグラウンディングする</h2>
+<p>聴覚・触覚・視覚・味覚・嗅覚を使い分けている私たちが暮らす世界でわかり合うためには、<br>
+やっぱりカメラだけとかマイクだけでは十分ではない気がします。<br>
+もちろん、すでに市場にでているロボットは様々なモーダルを駆使して動いていますが、各モーダルをうまく統合して認識結果として処理する必要があります。</p>
+<p>画像と音と言語の各モーダルで共通する意味空間をつくったり、互いのモーダル情報をマッピングしたりする技術が少しずつ出てきています。</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1706.00932">See, Hear, and Read: Deep Aligned Representation</a></li>
+<li><a href="https://arxiv.org/abs/1712.06651">Objects that Sound</a></li>
+</ul>
+<h2 id="slam-">SLAM: 自分がどこにいるのか知る</h2>
+<p>SLAMというのは、加速度センサの情報や視覚的特徴量から自分が部屋のどこにいるかを推定する技術です。<br>
+これがないと、ロボットがもとの場所に帰ることすらままならないくらい大切な技術です。<br>
+Oculus Questのような外部センサを不要とするVRシステムやARシステムでも必須です。<br>
+最近は、CNNを使ったVisual SLAMが盛んに研究されています。</p>
+<ul>
+<li><a href="http://webdiis.unizar.es/~raulmur/MurMontielTardosTRO15.pdf">ORB-SLAM: A Versatile and Accurate Monocular SLAM System</a></li>
+<li><a href="https://arxiv.org/abs/1808.01900">DeepTAM: Deep Tracking and Mapping</a></li>
+<li><a href="https://openvslam.readthedocs.io/en/master/">OpenVSLAM</a></li>
+</ul>
+<h2 id="lifelong-ml-">Lifelong ML: 状況に応じて学習し続ける</h2>
+<p>最近、一番注目している分野です。<br>
+従来の機械学習の枠組みでは、一度学習したあとに異なるタスクを追加的に学習していくことはほぼ不可能でした。<br>
+その問題にチャレンジしようというのがLifelong MLです。<br>
+実際問題、ロボットのいる環境は刻一刻と変わりますし、ラボから出た時点で到底完成された認識器を作れるとは思えないのです。</p>
+<ul>
+<li><a href="https://blog.dshmk.com/posts/survey/continual-learning-servey/">Continual Learning (Lifelong Machine Learning) のことを調べた</a></li>
+<li><a href="https://www.amazon.co.jp/Lifelong-Learning-Synthesis-Artificial-Intelligence/dp/1681733021">Lifelong Machine Learning</a></li>
+</ul>
+<h2 id="hai-">HAI: 人間とロボットがコミュニケーションできるようにするために</h2>
+<p>そもそも、それっぽく動くロボットができたところで私達人間はそれを受け入れられるのでしょうか。<br>
+その疑問に答えてくれるのが、Human-Agent Interactionです。<br>
+人格があるように見えるロボットの電源を切る行為を人間はどう思うのか、<br>
+とかロボットがコミュニケーションするためにどんな要因に配慮すべきかを研究する領域です。<br>
+人間と一緒に生きるなら人間のことをよく理解して認識器を設計する必要があるんじゃないかとも思っています。</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/%E3%83%9E%E3%82%A4%E3%83%B3%E3%83%89%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%A9%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E2%80%95AI%E5%AD%A6%E8%80%85%E3%81%8C%E8%80%83%E3%81%88%E3%82%8B%E2%89%AA%E3%82%B3%E3%82%B3%E3%83%AD%E2%89%AB%E3%81%AE%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E2%80%95-%E5%B1%B1%E7%94%B0-%E8%AA%A0%E4%BA%8C/dp/4764905957/ref=sr_1_2?adgrpid=54895615818&amp;gclid=CjwKCAiAuK3vBRBOEiwA1IMhuur-ppLq6pd-zUsuJJ-mlh80KXchG-EI_t79oMBbIw18QmFZr-zpfxoCeMUQAvD_BwE&amp;hvadid=289160700154&amp;hvdev=c&amp;hvlocphy=1009332&amp;hvnetw=g&amp;hvpos=1t1&amp;hvqmt=b&amp;hvrand=3280582932149513730&amp;hvtargid=kwd-329962973491&amp;hydadcr=27303_11414841&amp;jp-ad-ap=0&amp;keywords=%E5%B1%B1%E7%94%B0%E8%AA%A0%E4%BA%8C&amp;qid=1575729061&amp;sr=8-2">マインドインタラクション―AI学者が考える≪ココロ≫のエージェント</a></li>
+<li><a href="https://www.amazon.co.jp/%E5%BC%B1%E3%81%84%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88-%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E3%82%B1%E3%82%A2%E3%82%92%E3%81%B2%E3%82%89%E3%81%8F-%E5%B2%A1%E7%94%B0-%E7%BE%8E%E6%99%BA%E7%94%B7/dp/4260016733/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;keywords=%E5%BC%B1%E3%81%84%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88&amp;qid=1575729129&amp;sr=8-1">弱いロボット</a></li>
+</ul>
+<h1 id="heading2">さいごに</h1>
+<p>完全に読み物になってしまったので、若干物足りなさがありますね。<br>
+12/22にリベンジするチャンスがあるので、次は認識器のエッジ推論系の話で手を動かしてみたことを書こうと思います。</p></div>
+</div>
+  <div class="footer-content">
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" href="https://github.com/dshmk">GitHub</a>
+      </li>
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" href="https://twitter.com/dshmki">Twitter</a>
+      </li>
+      <li class="pure-menu-item">
+        <a href="https://blog.dshmk.com/index.xml" class="pure-menu-link">RSS</a>
+      </li>
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" id="btn-gototop">
+          <span class="fixup">&#x21e7;&#xfe0e;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item pure-menu-disabled">
+        &copy; 2019 &mdash; dshmk.com — All rights reserved.
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  function setElementsClass(selector, value) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll(selector),
+      function(elem) { elem.className = value; }
+    );
+  }
+
+  setElementsClass('img', 'pure-img');
+  setElementsClass('table', 'pure-table');
+
+  function onResize() {
+      setElementsClass(
+        '.pure-menu', document.documentElement.clientWidth >= 568 ?
+              'pure-menu pure-menu-horizontal' : 'pure-menu'
+      );
+  }
+  onResize();
+  window.addEventListener('resize', onResize);
+
+  document.getElementById('btn-gototop').addEventListener('click', function() {
+    function scroll() {
+      if (window.pageYOffset > 0) { setTimeout(scroll, 8); }
+      window.scroll(0, window.pageYOffset - 128);
+    }
+    scroll();
+  });
+</script>
+
+  </div>
+  <div class="pure-u-1-24 pure-u-md-5-24"></div>
+</div>
+</body>
+</html>

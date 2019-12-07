@@ -8,8 +8,24 @@
 		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
 		<webMaster>egg@dshmk.com (dshmk)</webMaster>
 		<copyright>dshmk.com — All rights reserved.</copyright>
-		<lastBuildDate>Tue, 12 Mar 2019 00:24:17 +0900</lastBuildDate>
+		<lastBuildDate>Sat, 07 Dec 2019 23:53:40 +0900</lastBuildDate>
 		<atom:link href="https://blog.dshmk.com/tags/index.xml" rel="self" type="application/rss+xml" />
+		<item>
+			<title>paper</title>
+			<link>https://blog.dshmk.com/tags/paper/</link>
+			<pubDate>Sat, 07 Dec 2019 23:53:40 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/tags/paper/</guid>
+			<description></description>
+		</item>
+		<item>
+			<title>robot</title>
+			<link>https://blog.dshmk.com/tags/robot/</link>
+			<pubDate>Sat, 07 Dec 2019 23:53:40 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/tags/robot/</guid>
+			<description></description>
+		</item>
 		<item>
 			<title>vue.js</title>
 			<link>https://blog.dshmk.com/tags/vue.js/</link>
@@ -24,14 +40,6 @@
 			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
 			<author>egg@dshmk.com (dshmk)</author>
 			<guid>https://blog.dshmk.com/tags/continual-learning/</guid>
-			<description></description>
-		</item>
-		<item>
-			<title>paper</title>
-			<link>https://blog.dshmk.com/tags/paper/</link>
-			<pubDate>Tue, 15 Jan 2019 21:09:36 +0900</pubDate>
-			<author>egg@dshmk.com (dshmk)</author>
-			<guid>https://blog.dshmk.com/tags/paper/</guid>
 			<description></description>
 		</item>
 		<item>
