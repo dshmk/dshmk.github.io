@@ -87,7 +87,11 @@ toco \
 &lt;p&gt;ここはガッツリサボりました。
 &lt;a href=&#34;https://github.com/tensorflow/examples&#34;&gt;Tensorflow Examples&lt;/a&gt; の &lt;code&gt;lite/examples/detection&lt;/code&gt; に物体検出をAndroidアプリとして走らせるプロジェクトがあるのでそのまま流用しちゃいました。&lt;br&gt;
 &lt;code&gt;asset&lt;/code&gt; の中のモデルを入れ替えるだけです。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/fhOwpUc_s_Q&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;手持ちのPixel3で40msec.くらいで動いているのがわかります。&lt;br&gt;
 なにもチューニングしていないので、バウンディングボックスが二重に出ちゃったり暴れたりしてますね。。。&lt;br&gt;
 それでもTVやPerson、Mouseなどはちゃんと認識されていることがわかります。&lt;/p&gt;
