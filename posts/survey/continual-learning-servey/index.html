@@ -8,7 +8,7 @@
   <meta name="description" content="Continual Learning (今のところ和訳は特に当てられていないようだ）について簡単に調べたので、まとめておく。
 何も考えずに和訳を当てるとすると、&ldquo;継続学習&quot;といったところだろうか。" />
   <meta name="author" content="dshmk" />
-  <meta name="generator" content="Hugo 0.60.1" />
+  <meta name="generator" content="Hugo 0.61.0" />
   <link href="https://blog.dshmk.com/index.xml" rel="alternate" type="application/rss+xml" title="dshmk.com Feed" />
   <link rel="shortcut icon" href="https://blog.dshmk.com/img/favicon.ico" type="image/x-icon" />
   <!--[if lte IE 8]>
@@ -82,7 +82,7 @@
 <p>Lifelong~は生涯学習を指すので、個人的にはActive Learningのように教育系のタームと被らないContinualのほうが良いとおもうが…<br>
 ちなみに、サーベイ中に生涯学習の意味で&quot;Lifelong Learning&quot;と記述している情報系の論文にも遭遇した。</p>
 <p>ここでは面倒なので、Continual Learningもしくはその頭文字を取ってCLとする（しかし、CLだとCurriculum Learningともかぶるな…）。</p>
-<h2 id="heading1">歴史</h2>
+<h2 id="heading-1">歴史</h2>
 <p>おそらくCLの概念を言い出したのは、Cogitaiのファウンダーの<a href="https://www.cs.utexas.edu/~ring/">Mark Ring</a>が1994年に出した
 <a href="http://people.idsia.ch/~ring/Ring-dissertation.pdf">博士論文（pdf）</a>。</p>
 <p>ここで彼は、機械学習で新たな知識を学習する際に、すでに学習・習得した知識を再利用するように学習されるべきで、そのために<br>
@@ -184,7 +184,7 @@ CLについて取り扱っているものを以下にリストアップしてお
 <p>サーベイしてみると、catastrophic forgettingや新タスク学習コスト低減あたりを取り扱う研究が多そうだ。<br>
 タスク境界を教師なしで推定することや、新タスク学習によって既存タスク性能の向上を狙うところもかなり重要だと思う。</p>
 <p>複数の指標で多角的にモデルを評価できるようなベンチマークのやり方が決まってくればそれぞれ手を付ける人が増えてきそうな感もある。</p>
-<h1 id="heading2">主要論文リスト</h1>
+<h1 id="heading-2">主要論文リスト</h1>
 <p>探せば結構関連した論文は多く見つかるが、個人的に読んでおきたいものを中心にリストアップしておく。</p>
 <ul>
 <li><a href="http://people.idsia.ch/~ring/Ring-dissertation.pdf">Continual Learning in Reinforcement Environments</a>
@@ -229,7 +229,7 @@ CLについて取り扱っているものを以下にリストアップしてお
 <li>PANS'17</li>
 <li>Raia Hadsellのチーム (Deep Mind)</li>
 <li>elastic weight consolidation論文</li>
-<li>arXiv版: <a href="https://arxiv.org/abs/1612.00796"><a href="https://arxiv.org/abs/1612.00796">https://arxiv.org/abs/1612.00796</a></a></li>
+<li>arXiv版: <a href="https://arxiv.org/abs/1612.00796">https://arxiv.org/abs/1612.00796</a></li>
 </ul>
 </li>
 <li><a href="https://arxiv.org/abs/1705.08395">Continual Learning in Generative Adversarial Nets</a>
@@ -248,7 +248,7 @@ CLについて取り扱っているものを以下にリストアップしてお
 <li>NIPS'17</li>
 <li>Marc'Aurelio Ranzatoのチーム（FAIR）</li>
 <li>Gradient Episodic Memory (GEM)論文</li>
-<li>実装: <a href="https://github.com/facebookresearch/GradientEpisodicMemory"><a href="https://github.com/facebookresearch/GradientEpisodicMemory">https://github.com/facebookresearch/GradientEpisodicMemory</a></a></li>
+<li>実装: <a href="https://github.com/facebookresearch/GradientEpisodicMemory">https://github.com/facebookresearch/GradientEpisodicMemory</a></li>
 </ul>
 </li>
 <li><a href="https://arxiv.org/abs/1802.07569">Continual Lifelong Learning with Neural Networks: A Review</a>

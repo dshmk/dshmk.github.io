@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+  <meta charset="utf-8" />
+  <title>Tensorflow Lite のモデルをAndroid端末で動かす | dshmk.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="彌冨研 Advent Calendar 2019 22日目の記事です。
+当日の夜19時から始めてその日のうちにTFLiteのモデルをスマホにデプロイするまでの話。
+デプロイは当日中にできたが、記事は当日中に書ききれなかった。。。ごめんなさい。" />
+  <meta name="author" content="dshmk" />
+  <meta name="generator" content="Hugo 0.61.0" />
+  <link href="https://blog.dshmk.com/index.xml" rel="alternate" type="application/rss+xml" title="dshmk.com Feed" />
+  <link rel="shortcut icon" href="https://blog.dshmk.com/img/favicon.ico" type="image/x-icon" />
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://blog.dshmk.com/assets/style-compat.css" />
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://blog.dshmk.com/assets/style.css" />
+  <!--<![endif]-->
+</head>
+<body>
+<div class="pure-g">
+  <div class="pure-u-1-24 pure-u-md-5-24"></div>
+  <div class="pure-u-22-24 pure-u-md-14-24">
+  <div class="navigation-header">
+  <div class="pure-menu pure-menu-horizontal">
+    <a class="pure-menu-heading pure-menu-link" href="https://blog.dshmk.com/">
+      dshmk.com
+    </a>
+    <ul class="pure-menu-list pull-end navigation-header-subtitle">
+      <li class="pure-menu-item pure-menu-disabled">Making the World Computable</li>
+    </ul>
+  </div>
+</div>
+<div class="navigation-content">
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/posts/">Posts</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/categories/">Categories</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/series/">Series</a>
+      </li>
+      <li class="pure-menu-item">
+        <a  class="pure-menu-link" href="https://blog.dshmk.com/tags/">Tags</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+  
+<div>
+  <div>
+    <h1 class="post-title">Tensorflow Lite のモデルをAndroid端末で動かす</h1>
+    <div class="post-meta">
+  Date &#x5b;
+    <time datetime="2019-12-23T00:25:38&#43;09:00">23 Dec 19 00:25 JST</time>
+  &#x5d;
+  Categories &#x5b;
+                <a href="https://blog.dshmk.com/categories/edgeai/">edgeAI</a>
+  &#x5d;
+  Tags &#x5b;
+                <a href="https://blog.dshmk.com/tags/edgeai/">&#x23;edgeAI</a>
+            &#x20;&#x7c;&#x20;
+                <a href="https://blog.dshmk.com/tags/tensorflow/">&#x23;Tensorflow</a>
+            &#x20;&#x7c;&#x20;
+                <a href="https://blog.dshmk.com/tags/tensorflowlite/">&#x23;TensorflowLite</a>
+  &#x5d;
+</div>
+
+  </div>
+  <div><p><a href="https://adventar.org/calendars/4371">彌冨研 Advent Calendar 2019</a> 22日目の記事です。<br>
+当日の夜19時から始めてその日のうちにTFLiteのモデルをスマホにデプロイするまでの話。</p>
+<p>デプロイは当日中にできたが、記事は当日中に書ききれなかった。。。ごめんなさい。</p>
+<h1 id="heading">これまでのあらすじ</h1>
+<p><a href="https://blog.dshmk.com/posts/robot/">&ldquo;僕はロボットのための認識器をつくりたい&rdquo;</a> をよんでね</p>
+<h1 id="nn">エッジデバイスでNNモデルを推論させよう</h1>
+<p>エッジデバイスで推論させるためにNNを軽量にしたり推論時の速度を高速にするテクニックが色々とあります。<br>
+基本的に、各アプローチは以下の3わけられるはずです。</p>
+<ul>
+<li>Convolutionの演算回数を減らす
+<ul>
+<li>Group / Depthwise Convolution</li>
+<li>ShuffleNet</li>
+</ul>
+</li>
+<li>パラメータの量子化</li>
+<li>推論向けのグラフ最適化</li>
+</ul>
+<p>&ldquo;Convolutionの演算回数を減らす&rdquo; と &ldquo;パラメータの量子化&rdquo; は実際に推論するデバイスによって効果が変わってきます。<br>
+手法によっては、FLOPSは確かに減っているんだけども並列性が犠牲になっていてGPU推論に向かなかったり、<br>
+デバイスによっては、16bit floatや8bitに最適化されきっていなかったりします。</p>
+<p>しかしながら、速度だけ見ていればよいかというとそういうわけでなく、<br>
+スマホのようにバッテリーを持つデバイスであれば消費電力も考慮するべきです。<br>
+そういうときには、量子化のようにパラメータ数も演算時のプロセッサへの負荷も大きく減らせる方法が有力になるでしょう。</p>
+<h1 id="tensorflow">Tensorflowモデルをスマホで動かすまで</h1>
+<p>さてさて、本題です。<br>
+エッジ推論用のフレームワークはTVM (ワシントン大), SNPE (クアルコム), ONNX Runtime (マイクロソフト) など色々ありますが、今回はGoogle製のTensorflow Liteを使うことにしました。</p>
+<ul>
+<li>Tensorflowの学習済みモデルの多くが使える</li>
+<li>スマホ向けのexample projectが充実している</li>
+<li>量子化機能がついている</li>
+</ul>
+<h2 id="heading-1">下準備</h2>
+<p>Ubuntu 18.04で作業してます。</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python3 --version #3.6.8
+pip3 install tensorflow==1.14.0
+wget https://dl.google.com/coral/python/tflite_runtime-1.14.0-cp36-cp36m-linux_x86_64.whl
+pip3 install tflite_runtime-1.14.0-cp36-cp36m-linux_x86_64.whl 
+wget -O protobuf.zip https://github.com/google/protobuf/releases/download/v3.0.0/protoc-3.0.0-linux-x86_64.zip
+unzip protobuf.zip
+</code></pre></div><h2 id="tensorflowtflite">TensorflowモデルをTFLiteモデルに変換する</h2>
+<p>今回はMobileNetv1 SSDモデルを量子化してスマホで動かします。</p>
+<p>本当はMobileNetv2でやりたかったのですが、未だに動かせないというIssueがOpenしている。。</p>
+<p>まずはTensorflow Object Detection APIのインストールしておく</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/tensorflow/models.git
+cd models/research
+python3 setup.py build
+python3 setup.py install
+../../bin/protoc object_detection/protos/*.proto --python_out=.
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+</code></pre></div><p>モデルを落としてきて、TFLite形式のモデルに変換したあとにTensorflow Lite Optimize Converter (TOCO) で量子化などの推論向け最適化を実施する。</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz
+tar -zxvf ssd_mobilenet_v1_coco_2018_01_28.tar.gz 
+python3 object_detection/export_tflite_ssd_graph.py \
+    --pipeline_config_path=ssd_mobilenet_v1_coco_2018_01_28/pipeline.config \
+    --trained_checkpoint_prefix=ssd_mobilenet_v1_coco_2018_01_28/model.ckpt \ 
+    --output_directory=/tmp/tflite \ 
+    --add_postprocessing_op=true
+toco \ 
+    --graph_def_file=/tmp/tflite/tflite_graph.pb \
+    --output_file=/tmp/tflite/detect.tffile \
+    --input_shape=1,300,300,3 \
+    --input_arrays=normalized_input_image_tensor \
+    --output_arrays=&#39;TFLite_Detection_PostProcess&#39;,&#39;TFLite_Detection_PostProcess:1&#39;,&#39;TFLite_Detection_PostProcess:2&#39;,&#39;TFLite_Detection_PostProcess:3&#39; \
+    --inference_type=QUANTIZED_UINT8 \
+    --mean_values=128 --std_dev_values=128 \
+    --change_concat_input_ranges=false --allow_custom_ops
+</code></pre></div><h2 id="heading-2">スマホにのせる</h2>
+<p>ここはガッツリサボりました。
+<a href="https://github.com/tensorflow/examples">Tensorflow Examples</a> の <code>lite/examples/detection</code> に物体検出をAndroidアプリとして走らせるプロジェクトがあるのでそのまま流用しちゃいました。<br>
+<code>asset</code> の中のモデルを入れ替えるだけです。</p>
+<!-- raw HTML omitted -->
+<p>手持ちのPixel3で40msec.くらいで動いているのがわかります。<br>
+なにもチューニングしていないので、バウンディングボックスが二重に出ちゃったり暴れたりしてますね。。。<br>
+それでもTVやPerson、Mouseなどはちゃんと認識されていることがわかります。</p>
+<p>オプションコマンド名が公式docと違うとか、Android Studioの設定で若干躓いたりとかしましたが、<br>
+19時に始めて23時くらいにはスマホ上で物体検出モデルが動いちゃんですから普通に便利です。<br>
+スマホアプリ部分をカスタマイズすれば、自分で学習した独自モデルなんかも動かせそうです。</p></div>
+</div>
+  <div class="footer-content">
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" href="https://github.com/dshmk">GitHub</a>
+      </li>
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" href="https://twitter.com/dshmki">Twitter</a>
+      </li>
+      <li class="pure-menu-item">
+        <a href="https://blog.dshmk.com/index.xml" class="pure-menu-link">RSS</a>
+      </li>
+      <li class="pure-menu-item">
+        <a class="pure-menu-link" id="btn-gototop">
+          <span class="fixup">&#x21e7;&#xfe0e;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item pure-menu-disabled">
+        &copy; 2019 &mdash; dshmk.com — All rights reserved.
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  function setElementsClass(selector, value) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll(selector),
+      function(elem) { elem.className = value; }
+    );
+  }
+
+  setElementsClass('img', 'pure-img');
+  setElementsClass('table', 'pure-table');
+
+  function onResize() {
+      setElementsClass(
+        '.pure-menu', document.documentElement.clientWidth >= 568 ?
+              'pure-menu pure-menu-horizontal' : 'pure-menu'
+      );
+  }
+  onResize();
+  window.addEventListener('resize', onResize);
+
+  document.getElementById('btn-gototop').addEventListener('click', function() {
+    function scroll() {
+      if (window.pageYOffset > 0) { setTimeout(scroll, 8); }
+      window.scroll(0, window.pageYOffset - 128);
+    }
+    scroll();
+  });
+</script>
+
+  </div>
+  <div class="pure-u-1-24 pure-u-md-5-24"></div>
+</div>
+</body>
+</html>

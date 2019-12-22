@@ -3,19 +3,19 @@
 		<title>paper on dshmk.com</title>
 		<link>https://blog.dshmk.com/tags/paper/</link>
 		<description>Recent content in paper on dshmk.com</description>
-		<generator>Hugo 0.60.1 -- gohugo.io</generator>
+		<generator>Hugo 0.61.0 -- gohugo.io</generator>
 		<language>ja-JP</language>
 		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
 		<webMaster>egg@dshmk.com (dshmk)</webMaster>
 		<copyright>dshmk.com — All rights reserved.</copyright>
-		<lastBuildDate>Sat, 07 Dec 2019 23:53:40 +0900</lastBuildDate>
+		<lastBuildDate>Sat, 07 Dec 2019 23:59:59 +0900</lastBuildDate>
 		<atom:link href="https://blog.dshmk.com/tags/paper/index.xml" rel="self" type="application/rss+xml" />
 		<item>
 			<title>僕はロボットのための認識器をつくりたい</title>
-			<link>https://blog.dshmk.com/posts/robot/</link>
-			<pubDate>Sat, 07 Dec 2019 23:53:40 +0900</pubDate>
+			<link>https://blog.dshmk.com/posts/survey/make-robot/</link>
+			<pubDate>Sat, 07 Dec 2019 23:59:59 +0900</pubDate>
 			<author>egg@dshmk.com (dshmk)</author>
-			<guid>https://blog.dshmk.com/posts/robot/</guid>
+			<guid>https://blog.dshmk.com/posts/survey/make-robot/</guid>
 			<description>&lt;p&gt;彌冨研 Advent Calendar 2019 7日目の記事です。&lt;br&gt;
 最初はエッジAI推論の話を書こうと思ったんだけど、まずはその前になんでそういうことやっているかを話そうと思います。&lt;br&gt;
 別に時間がなくてとかそういう理由ではないです。うん。&lt;/p&gt;
@@ -24,7 +24,7 @@
 あの頃、僕が先生に「ディープラーニングっていうすごい技術があるんでこれで人間みたいな画像認識作りたいです」って言い出したんですが、&lt;br&gt;
 当時僕が思っていたよりもディープラーニングが盛り上がり、本当にたくさんのことができるようになりました。&lt;br&gt;
 とはいえいつも真面目に研究していたわけでなく、勝手に研究室のマシン名前つけたり、朝までSlack bot作ったり、研究と関係ないもの作ったりしてました。&lt;/p&gt;
-&lt;h1 id=&#34;heading1&#34;&gt;システムが物理的に作用する世界&lt;/h1&gt;
+&lt;h1 id=&#34;heading-1&#34;&gt;システムが物理的に作用する世界&lt;/h1&gt;
 &lt;p&gt;インターネットのような通信技術が進歩して、情報のや記号のやりとりで済んでいたもの（決済や認証など）はすっかりIT技術で取って代わられてしまいました。&lt;br&gt;
 とはいえ、物理世界に直接作用できているのは本当に少なくて、まだまだ人間が運転する乗り物に乗ったり人間が運んだ荷物をやり取りしたりしているわけです。&lt;br&gt;
 そう考えたときに、やっぱりシステムがアクチュエータを介して直接作用できるようになるのって夢があるなって思うわけです。&lt;br&gt;
@@ -86,7 +86,87 @@ Oculus Questのような外部センサを不要とするVRシステムやARシ�
 &lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/%E3%83%9E%E3%82%A4%E3%83%B3%E3%83%89%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%A9%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E2%80%95AI%E5%AD%A6%E8%80%85%E3%81%8C%E8%80%83%E3%81%88%E3%82%8B%E2%89%AA%E3%82%B3%E3%82%B3%E3%83%AD%E2%89%AB%E3%81%AE%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E2%80%95-%E5%B1%B1%E7%94%B0-%E8%AA%A0%E4%BA%8C/dp/4764905957/ref=sr_1_2?adgrpid=54895615818&amp;amp;gclid=CjwKCAiAuK3vBRBOEiwA1IMhuur-ppLq6pd-zUsuJJ-mlh80KXchG-EI_t79oMBbIw18QmFZr-zpfxoCeMUQAvD_BwE&amp;amp;hvadid=289160700154&amp;amp;hvdev=c&amp;amp;hvlocphy=1009332&amp;amp;hvnetw=g&amp;amp;hvpos=1t1&amp;amp;hvqmt=b&amp;amp;hvrand=3280582932149513730&amp;amp;hvtargid=kwd-329962973491&amp;amp;hydadcr=27303_11414841&amp;amp;jp-ad-ap=0&amp;amp;keywords=%E5%B1%B1%E7%94%B0%E8%AA%A0%E4%BA%8C&amp;amp;qid=1575729061&amp;amp;sr=8-2&#34;&gt;マインドインタラクション―AI学者が考える≪ココロ≫のエージェント&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/%E5%BC%B1%E3%81%84%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88-%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E3%82%B1%E3%82%A2%E3%82%92%E3%81%B2%E3%82%89%E3%81%8F-%E5%B2%A1%E7%94%B0-%E7%BE%8E%E6%99%BA%E7%94%B7/dp/4260016733/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;amp;keywords=%E5%BC%B1%E3%81%84%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88&amp;amp;qid=1575729129&amp;amp;sr=8-1&#34;&gt;弱いロボット&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;heading2&#34;&gt;さいごに&lt;/h1&gt;
+&lt;h1 id=&#34;heading-2&#34;&gt;さいごに&lt;/h1&gt;
+&lt;p&gt;完全に読み物になってしまったので、若干物足りなさがありますね。&lt;br&gt;
+12/22にリベンジするチャンスがあるので、次は認識器のエッジ推論系の話で手を動かしてみたことを書こうと思います。&lt;/p&gt;</description>
+		</item>
+		<item>
+			<title>僕はロボットのための認識器をつくりたい</title>
+			<link>https://blog.dshmk.com/posts/robot/</link>
+			<pubDate>Sat, 07 Dec 2019 23:53:40 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/posts/robot/</guid>
+			<description>&lt;p&gt;彌冨研 Advent Calendar 2019 7日目の記事です。&lt;br&gt;
+最初はエッジAI推論の話を書こうと思ったんだけど、まずはその前になんでそういうことやっているかを話そうと思います。&lt;br&gt;
+別に時間がなくてとかそういう理由ではないです。うん。&lt;/p&gt;
+&lt;h1 id=&#34;heading&#34;&gt;簡単な自己紹介&lt;/h1&gt;
+&lt;p&gt;彌冨研は卒業してから3年くらい経ちます。&lt;br&gt;
+あの頃、僕が先生に「ディープラーニングっていうすごい技術があるんでこれで人間みたいな画像認識作りたいです」って言い出したんですが、&lt;br&gt;
+当時僕が思っていたよりもディープラーニングが盛り上がり、本当にたくさんのことができるようになりました。&lt;br&gt;
+とはいえいつも真面目に研究していたわけでなく、勝手に研究室のマシン名前つけたり、朝までSlack bot作ったり、研究と関係ないもの作ったりしてました。&lt;/p&gt;
+&lt;h1 id=&#34;heading-1&#34;&gt;システムが物理的に作用する世界&lt;/h1&gt;
+&lt;p&gt;インターネットのような通信技術が進歩して、情報のや記号のやりとりで済んでいたもの（決済や認証など）はすっかりIT技術で取って代わられてしまいました。&lt;br&gt;
+とはいえ、物理世界に直接作用できているのは本当に少なくて、まだまだ人間が運転する乗り物に乗ったり人間が運んだ荷物をやり取りしたりしているわけです。&lt;br&gt;
+そう考えたときに、やっぱりシステムがアクチュエータを介して直接作用できるようになるのって夢があるなって思うわけです。&lt;br&gt;
+とはいえ、例えばロボットであれば、環境の認識&amp;ndash;&amp;gt;行動計画&amp;ndash;&amp;gt;制御 というサイクルを回しつづけるんですが、全部一人でやるのはちょっと大変です。&lt;br&gt;
+僕は、まずは環境をちゃんと理解しましょうということで認識部分に興味があって研究したりしています。&lt;/p&gt;
+&lt;p&gt;ということで、今日は実世界で我々と一緒に生活できるシステムを作るために、どんな認識技術が必要なのか考えてみたいと思います。&lt;/p&gt;
+&lt;h2 id=&#34;edge-ai-&#34;&gt;Edge AI: リアルタイムに認識する&lt;/h2&gt;
+&lt;p&gt;まずは、その場で即座に環境の情報を制御システムに渡してやる必要を考えないといけません。&lt;br&gt;
+そのためには、軽量で、できれば低消費電力で動く認識器がほしいわけです。&lt;/p&gt;
+&lt;p&gt;最近ではスマホ上で認識器を動かしたいというモチベーションもあり、軽量ディープラーニングアーキテクチャの研究がだいぶ出ています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1801.04381&#34;&gt;MobileNetV2: Inverted Residuals and Linear Bottlenecks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1812.00332&#34;&gt;ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1905.11946&#34;&gt;EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;それと、推論時用にニューラルネットワークのグラフ構造を最適化する技術もだいぶ使われています。&lt;br&gt;
+せっかく軽いネットワークにしたわけだから、プロセッサにとって無駄のない処理に仕上げる必要があります。&lt;br&gt;
+たとえば、Batch NormalizationとConvolutionは実行時には一つのレイヤーにまとめることができます。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tehnokv.com/posts/fusing-batchnorm-and-conv/&#34;&gt;Fusing batch normalization and convolution in runtime&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/microsoft/onnxruntime/blob/master/docs/ONNX_Runtime_Graph_Optimizations.md&#34;&gt;Graph Optimizations in ONNX Runtime&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1802.04799&#34;&gt;TVM: An Automated End-to-End Optimizing Compiler for Deep Learning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;multicross-modal-&#34;&gt;Multi/Cross Modal: 各感覚器入力を統合してグラウンディングする&lt;/h2&gt;
+&lt;p&gt;聴覚・触覚・視覚・味覚・嗅覚を使い分けている私たちが暮らす世界でわかり合うためには、&lt;br&gt;
+やっぱりカメラだけとかマイクだけでは十分ではない気がします。&lt;br&gt;
+もちろん、すでに市場にでているロボットは様々なモーダルを駆使して動いていますが、各モーダルをうまく統合して認識結果として処理する必要があります。&lt;/p&gt;
+&lt;p&gt;画像と音と言語の各モーダルで共通する意味空間をつくったり、互いのモーダル情報をマッピングしたりする技術が少しずつ出てきています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1706.00932&#34;&gt;See, Hear, and Read: Deep Aligned Representation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1712.06651&#34;&gt;Objects that Sound&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;slam-&#34;&gt;SLAM: 自分がどこにいるのか知る&lt;/h2&gt;
+&lt;p&gt;SLAMというのは、加速度センサの情報や視覚的特徴量から自分が部屋のどこにいるかを推定する技術です。&lt;br&gt;
+これがないと、ロボットがもとの場所に帰ることすらままならないくらい大切な技術です。&lt;br&gt;
+Oculus Questのような外部センサを不要とするVRシステムやARシステムでも必須です。&lt;br&gt;
+最近は、CNNを使ったVisual SLAMが盛んに研究されています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://webdiis.unizar.es/~raulmur/MurMontielTardosTRO15.pdf&#34;&gt;ORB-SLAM: A Versatile and Accurate Monocular SLAM System&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1808.01900&#34;&gt;DeepTAM: Deep Tracking and Mapping&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://openvslam.readthedocs.io/en/master/&#34;&gt;OpenVSLAM&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;lifelong-ml-&#34;&gt;Lifelong ML: 状況に応じて学習し続ける&lt;/h2&gt;
+&lt;p&gt;最近、一番注目している分野です。&lt;br&gt;
+従来の機械学習の枠組みでは、一度学習したあとに異なるタスクを追加的に学習していくことはほぼ不可能でした。&lt;br&gt;
+その問題にチャレンジしようというのがLifelong MLです。&lt;br&gt;
+実際問題、ロボットのいる環境は刻一刻と変わりますし、ラボから出た時点で到底完成された認識器を作れるとは思えないのです。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.dshmk.com/posts/survey/continual-learning-servey/&#34;&gt;Continual Learning (Lifelong Machine Learning) のことを調べた&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/Lifelong-Learning-Synthesis-Artificial-Intelligence/dp/1681733021&#34;&gt;Lifelong Machine Learning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hai-&#34;&gt;HAI: 人間とロボットがコミュニケーションできるようにするために&lt;/h2&gt;
+&lt;p&gt;そもそも、それっぽく動くロボットができたところで私達人間はそれを受け入れられるのでしょうか。&lt;br&gt;
+その疑問に答えてくれるのが、Human-Agent Interactionです。&lt;br&gt;
+人格があるように見えるロボットの電源を切る行為を人間はどう思うのか、&lt;br&gt;
+とかロボットがコミュニケーションするためにどんな要因に配慮すべきかを研究する領域です。&lt;br&gt;
+人間と一緒に生きるなら人間のことをよく理解して認識器を設計する必要があるんじゃないかとも思っています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/%E3%83%9E%E3%82%A4%E3%83%B3%E3%83%89%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%A9%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E2%80%95AI%E5%AD%A6%E8%80%85%E3%81%8C%E8%80%83%E3%81%88%E3%82%8B%E2%89%AA%E3%82%B3%E3%82%B3%E3%83%AD%E2%89%AB%E3%81%AE%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E2%80%95-%E5%B1%B1%E7%94%B0-%E8%AA%A0%E4%BA%8C/dp/4764905957/ref=sr_1_2?adgrpid=54895615818&amp;amp;gclid=CjwKCAiAuK3vBRBOEiwA1IMhuur-ppLq6pd-zUsuJJ-mlh80KXchG-EI_t79oMBbIw18QmFZr-zpfxoCeMUQAvD_BwE&amp;amp;hvadid=289160700154&amp;amp;hvdev=c&amp;amp;hvlocphy=1009332&amp;amp;hvnetw=g&amp;amp;hvpos=1t1&amp;amp;hvqmt=b&amp;amp;hvrand=3280582932149513730&amp;amp;hvtargid=kwd-329962973491&amp;amp;hydadcr=27303_11414841&amp;amp;jp-ad-ap=0&amp;amp;keywords=%E5%B1%B1%E7%94%B0%E8%AA%A0%E4%BA%8C&amp;amp;qid=1575729061&amp;amp;sr=8-2&#34;&gt;マインドインタラクション―AI学者が考える≪ココロ≫のエージェント&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/%E5%BC%B1%E3%81%84%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88-%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E3%82%B1%E3%82%A2%E3%82%92%E3%81%B2%E3%82%89%E3%81%8F-%E5%B2%A1%E7%94%B0-%E7%BE%8E%E6%99%BA%E7%94%B7/dp/4260016733/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;amp;keywords=%E5%BC%B1%E3%81%84%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88&amp;amp;qid=1575729129&amp;amp;sr=8-1&#34;&gt;弱いロボット&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;heading-2&#34;&gt;さいごに&lt;/h1&gt;
 &lt;p&gt;完全に読み物になってしまったので、若干物足りなさがありますね。&lt;br&gt;
 12/22にリベンジするチャンスがあるので、次は認識器のエッジ推論系の話で手を動かしてみたことを書こうと思います。&lt;/p&gt;</description>
 		</item>
@@ -106,7 +186,7 @@ Oculus Questのような外部センサを不要とするVRシステムやARシ�
 &lt;p&gt;Lifelong~は生涯学習を指すので、個人的にはActive Learningのように教育系のタームと被らないContinualのほうが良いとおもうが…&lt;br&gt;
 ちなみに、サーベイ中に生涯学習の意味で&amp;quot;Lifelong Learning&amp;quot;と記述している情報系の論文にも遭遇した。&lt;/p&gt;
 &lt;p&gt;ここでは面倒なので、Continual Learningもしくはその頭文字を取ってCLとする（しかし、CLだとCurriculum Learningともかぶるな…）。&lt;/p&gt;
-&lt;h2 id=&#34;heading1&#34;&gt;歴史&lt;/h2&gt;
+&lt;h2 id=&#34;heading-1&#34;&gt;歴史&lt;/h2&gt;
 &lt;p&gt;おそらくCLの概念を言い出したのは、Cogitaiのファウンダーの&lt;a href=&#34;https://www.cs.utexas.edu/~ring/&#34;&gt;Mark Ring&lt;/a&gt;が1994年に出した
 &lt;a href=&#34;http://people.idsia.ch/~ring/Ring-dissertation.pdf&#34;&gt;博士論文（pdf）&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;ここで彼は、機械学習で新たな知識を学習する際に、すでに学習・習得した知識を再利用するように学習されるべきで、そのために&lt;br&gt;
@@ -208,7 +288,7 @@ CLについて取り扱っているものを以下にリストアップしてお
 &lt;p&gt;サーベイしてみると、catastrophic forgettingや新タスク学習コスト低減あたりを取り扱う研究が多そうだ。&lt;br&gt;
 タスク境界を教師なしで推定することや、新タスク学習によって既存タスク性能の向上を狙うところもかなり重要だと思う。&lt;/p&gt;
 &lt;p&gt;複数の指標で多角的にモデルを評価できるようなベンチマークのやり方が決まってくればそれぞれ手を付ける人が増えてきそうな感もある。&lt;/p&gt;
-&lt;h1 id=&#34;heading2&#34;&gt;主要論文リスト&lt;/h1&gt;
+&lt;h1 id=&#34;heading-2&#34;&gt;主要論文リスト&lt;/h1&gt;
 &lt;p&gt;探せば結構関連した論文は多く見つかるが、個人的に読んでおきたいものを中心にリストアップしておく。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://people.idsia.ch/~ring/Ring-dissertation.pdf&#34;&gt;Continual Learning in Reinforcement Environments&lt;/a&gt;
@@ -253,7 +333,7 @@ CLについて取り扱っているものを以下にリストアップしてお
 &lt;li&gt;PANS&#39;17&lt;/li&gt;
 &lt;li&gt;Raia Hadsellのチーム (Deep Mind)&lt;/li&gt;
 &lt;li&gt;elastic weight consolidation論文&lt;/li&gt;
-&lt;li&gt;arXiv版: &lt;a href=&#34;https://arxiv.org/abs/1612.00796&#34;&gt;&lt;a href=&#34;https://arxiv.org/abs/1612.00796&#34;&gt;https://arxiv.org/abs/1612.00796&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;arXiv版: &lt;a href=&#34;https://arxiv.org/abs/1612.00796&#34;&gt;https://arxiv.org/abs/1612.00796&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1705.08395&#34;&gt;Continual Learning in Generative Adversarial Nets&lt;/a&gt;
@@ -272,7 +352,7 @@ CLについて取り扱っているものを以下にリストアップしてお
 &lt;li&gt;NIPS&#39;17&lt;/li&gt;
 &lt;li&gt;Marc&#39;Aurelio Ranzatoのチーム（FAIR）&lt;/li&gt;
 &lt;li&gt;Gradient Episodic Memory (GEM)論文&lt;/li&gt;
-&lt;li&gt;実装: &lt;a href=&#34;https://github.com/facebookresearch/GradientEpisodicMemory&#34;&gt;&lt;a href=&#34;https://github.com/facebookresearch/GradientEpisodicMemory&#34;&gt;https://github.com/facebookresearch/GradientEpisodicMemory&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;実装: &lt;a href=&#34;https://github.com/facebookresearch/GradientEpisodicMemory&#34;&gt;https://github.com/facebookresearch/GradientEpisodicMemory&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1802.07569&#34;&gt;Continual Lifelong Learning with Neural Networks: A Review&lt;/a&gt;

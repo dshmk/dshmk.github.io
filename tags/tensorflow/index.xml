@@ -1,0 +1,99 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Tensorflow on dshmk.com</title>
+		<link>https://blog.dshmk.com/tags/tensorflow/</link>
+		<description>Recent content in Tensorflow on dshmk.com</description>
+		<generator>Hugo 0.61.0 -- gohugo.io</generator>
+		<language>ja-JP</language>
+		<managingEditor>egg@dshmk.com (dshmk)</managingEditor>
+		<webMaster>egg@dshmk.com (dshmk)</webMaster>
+		<copyright>dshmk.com — All rights reserved.</copyright>
+		<lastBuildDate>Mon, 23 Dec 2019 00:25:38 +0900</lastBuildDate>
+		<atom:link href="https://blog.dshmk.com/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+		<item>
+			<title>Tensorflow Lite のモデルをAndroid端末で動かす</title>
+			<link>https://blog.dshmk.com/posts/tflite-android/</link>
+			<pubDate>Mon, 23 Dec 2019 00:25:38 +0900</pubDate>
+			<author>egg@dshmk.com (dshmk)</author>
+			<guid>https://blog.dshmk.com/posts/tflite-android/</guid>
+			<description>&lt;p&gt;&lt;a href=&#34;https://adventar.org/calendars/4371&#34;&gt;彌冨研 Advent Calendar 2019&lt;/a&gt; 22日目の記事です。&lt;br&gt;
+当日の夜19時から始めてその日のうちにTFLiteのモデルをスマホにデプロイするまでの話。&lt;/p&gt;
+&lt;p&gt;デプロイは当日中にできたが、記事は当日中に書ききれなかった。。。ごめんなさい。&lt;/p&gt;
+&lt;h1 id=&#34;heading&#34;&gt;これまでのあらすじ&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.dshmk.com/posts/robot/&#34;&gt;&amp;ldquo;僕はロボットのための認識器をつくりたい&amp;rdquo;&lt;/a&gt; をよんでね&lt;/p&gt;
+&lt;h1 id=&#34;nn&#34;&gt;エッジデバイスでNNモデルを推論させよう&lt;/h1&gt;
+&lt;p&gt;エッジデバイスで推論させるためにNNを軽量にしたり推論時の速度を高速にするテクニックが色々とあります。&lt;br&gt;
+基本的に、各アプローチは以下の3わけられるはずです。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Convolutionの演算回数を減らす
+&lt;ul&gt;
+&lt;li&gt;Group / Depthwise Convolution&lt;/li&gt;
+&lt;li&gt;ShuffleNet&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;パラメータの量子化&lt;/li&gt;
+&lt;li&gt;推論向けのグラフ最適化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;Convolutionの演算回数を減らす&amp;rdquo; と &amp;ldquo;パラメータの量子化&amp;rdquo; は実際に推論するデバイスによって効果が変わってきます。&lt;br&gt;
+手法によっては、FLOPSは確かに減っているんだけども並列性が犠牲になっていてGPU推論に向かなかったり、&lt;br&gt;
+デバイスによっては、16bit floatや8bitに最適化されきっていなかったりします。&lt;/p&gt;
+&lt;p&gt;しかしながら、速度だけ見ていればよいかというとそういうわけでなく、&lt;br&gt;
+スマホのようにバッテリーを持つデバイスであれば消費電力も考慮するべきです。&lt;br&gt;
+そういうときには、量子化のようにパラメータ数も演算時のプロセッサへの負荷も大きく減らせる方法が有力になるでしょう。&lt;/p&gt;
+&lt;h1 id=&#34;tensorflow&#34;&gt;Tensorflowモデルをスマホで動かすまで&lt;/h1&gt;
+&lt;p&gt;さてさて、本題です。&lt;br&gt;
+エッジ推論用のフレームワークはTVM (ワシントン大), SNPE (クアルコム), ONNX Runtime (マイクロソフト) など色々ありますが、今回はGoogle製のTensorflow Liteを使うことにしました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tensorflowの学習済みモデルの多くが使える&lt;/li&gt;
+&lt;li&gt;スマホ向けのexample projectが充実している&lt;/li&gt;
+&lt;li&gt;量子化機能がついている&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;heading-1&#34;&gt;下準備&lt;/h2&gt;
+&lt;p&gt;Ubuntu 18.04で作業してます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;python3 --version #3.6.8
+pip3 install tensorflow==1.14.0
+wget https://dl.google.com/coral/python/tflite_runtime-1.14.0-cp36-cp36m-linux_x86_64.whl
+pip3 install tflite_runtime-1.14.0-cp36-cp36m-linux_x86_64.whl 
+wget -O protobuf.zip https://github.com/google/protobuf/releases/download/v3.0.0/protoc-3.0.0-linux-x86_64.zip
+unzip protobuf.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;tensorflowtflite&#34;&gt;TensorflowモデルをTFLiteモデルに変換する&lt;/h2&gt;
+&lt;p&gt;今回はMobileNetv1 SSDモデルを量子化してスマホで動かします。&lt;/p&gt;
+&lt;p&gt;本当はMobileNetv2でやりたかったのですが、未だに動かせないというIssueがOpenしている。。&lt;/p&gt;
+&lt;p&gt;まずはTensorflow Object Detection APIのインストールしておく&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;git clone https://github.com/tensorflow/models.git
+cd models/research
+python3 setup.py build
+python3 setup.py install
+../../bin/protoc object_detection/protos/*.proto --python_out=.
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;モデルを落としてきて、TFLite形式のモデルに変換したあとにTensorflow Lite Optimize Converter (TOCO) で量子化などの推論向け最適化を実施する。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz
+tar -zxvf ssd_mobilenet_v1_coco_2018_01_28.tar.gz 
+python3 object_detection/export_tflite_ssd_graph.py \
+    --pipeline_config_path=ssd_mobilenet_v1_coco_2018_01_28/pipeline.config \
+    --trained_checkpoint_prefix=ssd_mobilenet_v1_coco_2018_01_28/model.ckpt \ 
+    --output_directory=/tmp/tflite \ 
+    --add_postprocessing_op=true
+toco \ 
+    --graph_def_file=/tmp/tflite/tflite_graph.pb \
+    --output_file=/tmp/tflite/detect.tffile \
+    --input_shape=1,300,300,3 \
+    --input_arrays=normalized_input_image_tensor \
+    --output_arrays=&amp;#39;TFLite_Detection_PostProcess&amp;#39;,&amp;#39;TFLite_Detection_PostProcess:1&amp;#39;,&amp;#39;TFLite_Detection_PostProcess:2&amp;#39;,&amp;#39;TFLite_Detection_PostProcess:3&amp;#39; \
+    --inference_type=QUANTIZED_UINT8 \
+    --mean_values=128 --std_dev_values=128 \
+    --change_concat_input_ranges=false --allow_custom_ops
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heading-2&#34;&gt;スマホにのせる&lt;/h2&gt;
+&lt;p&gt;ここはガッツリサボりました。
+&lt;a href=&#34;https://github.com/tensorflow/examples&#34;&gt;Tensorflow Examples&lt;/a&gt; の &lt;code&gt;lite/examples/detection&lt;/code&gt; に物体検出をAndroidアプリとして走らせるプロジェクトがあるのでそのまま流用しちゃいました。&lt;br&gt;
+&lt;code&gt;asset&lt;/code&gt; の中のモデルを入れ替えるだけです。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;手持ちのPixel3で40msec.くらいで動いているのがわかります。&lt;br&gt;
+なにもチューニングしていないので、バウンディングボックスが二重に出ちゃったり暴れたりしてますね。。。&lt;br&gt;
+それでもTVやPerson、Mouseなどはちゃんと認識されていることがわかります。&lt;/p&gt;
+&lt;p&gt;オプションコマンド名が公式docと違うとか、Android Studioの設定で若干躓いたりとかしましたが、&lt;br&gt;
+19時に始めて23時くらいにはスマホ上で物体検出モデルが動いちゃんですから普通に便利です。&lt;br&gt;
+スマホアプリ部分をカスタマイズすれば、自分で学習した独自モデルなんかも動かせそうです。&lt;/p&gt;</description>
+		</item>
+	</channel>
+</rss>
